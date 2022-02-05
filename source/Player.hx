@@ -41,7 +41,6 @@ class Player extends FlxSprite
 		down = FlxG.keys.anyPressed([DOWN, S]);
 		left = FlxG.keys.anyPressed([LEFT, A]);
 		right = FlxG.keys.anyPressed([RIGHT, D]);
-		trace(up, down, left, right);
 		if (up && down)
 			up = down = false;
 		if (left && right)
@@ -81,7 +80,6 @@ class Player extends FlxSprite
 			// determine our velocity based on angle and speed
 			velocity.set(RUN_SPEED, 0);
 			velocity.rotate(FlxPoint.weak(0, 0), newAngle);
-			trace(velocity);
 			// if the player is moving (velocity is not 0 for either axis), we need to change the animation to match their facing
 			if ((velocity.x != 0 || velocity.y != 0))
 			{
@@ -89,13 +87,10 @@ class Player extends FlxSprite
 				{
 					case FlxObject.LEFT, FlxObject.RIGHT:
 						animation.play("lr");
-						trace("LEFT/RIGHT");
 					case FlxObject.UP:
 						animation.play("u");
-						trace("UP");
 					case FlxObject.DOWN:
 						animation.play("d");
-						trace("DOWN");
 					case _:
 				}
 			}
