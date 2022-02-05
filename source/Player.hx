@@ -26,6 +26,8 @@ class Player extends FlxSprite
 		setSize(16, 16);
 		// offset.set(16, 16);
 		drag.x = drag.y = 1600;
+		setSize(8, 8);
+		offset.set(4, 4);
 	}
 
 	function updateMovement(elapsed:Float)

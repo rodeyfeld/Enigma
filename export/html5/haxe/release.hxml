@@ -1,6 +1,6 @@
 -main ApplicationMain 
--cp C:/HaxeToolkit/haxe/lib/flixel/4,9,0
--D flixel=4.9.0
+-cp C:/HaxeToolkit/haxe/lib/flixel/4,11,0
+-D flixel=4.11.0
 --macro openfl.utils._internal.ExtraParamsMacro.include()
 -cp C:/HaxeToolkit/haxe/lib/openfl/9,1,0/src
 -D openfl=9.1.0
@@ -10,9 +10,9 @@
 --macro keep('IntIterator')
 -cp C:/HaxeToolkit/haxe/lib/hscript/2,4,0
 -D hscript=2.4.0
--cp C:/HaxeToolkit/haxe/lib/flixel-addons/2,10,0
--D flixel-addons=2.10.0
--cp C:/HaxeToolkit/haxe/lib/ldtk-haxe-api/git/src
+-cp C:/HaxeToolkit/haxe/lib/flixel-addons/2,11,0
+-D flixel-addons=2.11.0
+-cp C:/HaxeToolkit/haxe/lib/ldtk-haxe-api/0,9,3-rc,1/src
 -D ldtk-haxe-api=0.9.3-rc.1
 -cp C:/HaxeToolkit/haxe/lib/deepnightLibs/git/src
 -D deepnightLibs=1.0.67
@@ -33,7 +33,7 @@
 --remap flash:openfl
 --macro flixel.system.macros.FlxDefines.run()
 --connect
-6001
+6000
 -js export/html5/bin/Enigma.js
 -cp export/html5/haxe
 -D html5
