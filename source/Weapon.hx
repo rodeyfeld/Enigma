@@ -14,6 +14,6 @@ class Weapon
 
 	function fireBullet()
 	{
-		var bullet = new Bullet(bulletType.graphic, bulletType.width, bulletType.height);
+		var bullet = new Bullet(bulletType);
 	}
 }

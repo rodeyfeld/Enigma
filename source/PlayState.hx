@@ -77,7 +77,7 @@ class PlayState extends FlxState
 		deadZoneMouse = FlxRect.get(0, 0, FlxG.mouse.x, FlxG.mouse.y);
 		deadZoneTight = FlxRect.get(0, 0, player.x, player.y);
 		FlxG.camera.follow(player);
-		FlxG.camera.deadzone = deadZoneTight;
+		// FlxG.camera.deadzone = deadZoneTight;
 
 		map.loadEntities(placeEntities, "entities");
 
@@ -141,10 +141,11 @@ class PlayState extends FlxState
 		{
 			coins.add(new Coin(randomX.int(1, cast(walls.width, Int)), randomY.int(1, cast(walls.height, Int))));
 		}
-		trace("x difference is: ", Math.abs(player.x - FlxG.mouse.x), "y difference is:", Math.abs(player.y - FlxG.mouse.y));
-		if (Math.abs(player.x - FlxG.mouse.x) > 50 || Math.abs(player.y - FlxG.mouse.y) > 50)
-		{
-			FlxG.camera.deadzone = deadZoneMouse;
+		// trace("x difference is: ", Math.abs(player.x - FlxG.mouse.x), "y difference is:", Math.abs(player.y - FlxG.mouse.y));
+		// if (Math.abs(player.x - FlxG.mouse.x) > 50 || Math.abs(player.y - FlxG.mouse.y) > 50)
+		// {
+		// 	FlxG.camera.deadzone = deadZoneMouse;
+		// }
 
 		// Enemy spawining logic
 		if (enemySpawnTimer <= 0)

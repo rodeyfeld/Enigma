@@ -3,7 +3,6 @@ package;
 class BulletType
 {
 	var graphic:String;
-
 	var width:Int;
 	var height:Int;
 

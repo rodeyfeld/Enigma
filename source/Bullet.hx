@@ -7,6 +7,6 @@ class Bullet extends FlxSprite
 	public function new(bulletType)
 	{
 		super();
-		loadGraphic(bulletType.graphic, true, bulletType.width, bulletType.height);
+		// loadGraphic(bulletType.graphic, true, bulletType.width, bulletType.height);
 	}
 }

@@ -1,5 +1,6 @@
 package;
 
+import MenuState;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.text.FlxText;
