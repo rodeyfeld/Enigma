@@ -39,9 +39,13 @@ class PlayState extends FlxState
 		super.create();
 
 		// World Setup
+		// FlxG.worldBounds = new FlxRect(0, 0, 1023, 1023);
+
 		map = new FlxOgmo3Loader(AssetPaths.enigma__ogmo, AssetPaths.level1__json);
 		walls = map.loadTilemap(AssetPaths.TX_Tileset_Grass__png, "walls");
 		ground = map.loadTilemap(AssetPaths.TX_Tileset_Grass__png, "ground");
+		trace(walls.widthInTiles, walls.width);
+		FlxG.worldBounds.set(0, 0, walls.width, walls.height);
 		add(ground);
 		add(walls);
 

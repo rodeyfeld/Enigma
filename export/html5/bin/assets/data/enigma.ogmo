@@ -2,7 +2,7 @@
   "name": "enigma",
   "ogmoVersion": "3.4.0",
   "levelPaths": ["."],
-  "backgroundColor": "#282c34ff",
+  "backgroundColor": "#2e4a82ff",
   "gridColor": "#3c4049cc",
   "anglesRadians": false,
   "directoryDepth": 5,
@@ -31,8 +31,8 @@
       "gridSize": {"x": 16, "y": 16},
       "exportID": "08227756",
       "exportMode": 0,
-      "arrayMode": 0,
-      "defaultTileset": ""
+      "arrayMode": 1,
+      "defaultTileset": "tiles"
     },
     {
       "definition": "tile",
@@ -40,15 +40,15 @@
       "gridSize": {"x": 16, "y": 16},
       "exportID": "08257577",
       "exportMode": 0,
-      "arrayMode": 0,
+      "arrayMode": 1,
       "defaultTileset": "tiles"
     }
   ],
   "entities": [
     {
       "exportID": "08225747",
-      "name": "player",
-      "limit": -1,
+      "name": "player1",
+      "limit": 1,
       "size": {"x": 16, "y": 16},
       "origin": {"x": 0, "y": 0},
       "originAnchored": true,
