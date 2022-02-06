@@ -3,3 +3,5 @@ export/html5/haxe/ManifestResources.hx
 export/html5/haxe/ApplicationMain.hx
 export/html5/bin/manifest/default.json
 export/html5/bin/Enigma.js
+export/**
+**/export/
