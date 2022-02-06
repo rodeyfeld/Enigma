@@ -1,14 +1,17 @@
 package;
 
+import BulletType;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;
-import flixel.system.FlxSound;
 
 class Player extends FlxSprite
 {
 	public static inline var RUN_SPEED:Int = 100;
+
+	public var weapons = new Array<Weapon>();
+	public var fireBallWeapon:Weapon;
 
 	public function new(x:Float = 0, y:Float = 0)
 	{
@@ -18,16 +21,15 @@ class Player extends FlxSprite
 		setFacingFlip(FlxObject.RIGHT, true, false);
 		animation.add("d", [0, 1, 2], 6, false);
 		animation.add("lr", [15, 16, 17], 6, false);
-		// animation.add("right", [24, 25, 26], 6, false);
 		animation.add("u", [45, 46, 47], 6, false);
-		// convert this to range
-		// animation.add("attack1", [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59], 10, false);
-		// drag.set(RUN_SPEED * 8, RUN_SPEED * 8);
 		setSize(16, 16);
-		// offset.set(16, 16);
 		drag.x = drag.y = 1600;
-		setSize(8, 8);
 		offset.set(4, 4);
+
+		// Weapons
+		var bulletType = new Fireball();
+		var fireballWeapon = new Weapon(bulletType);
+		weapons.push(fireballWeapon);
 	}
 
 	function updateMovement(elapsed:Float)
