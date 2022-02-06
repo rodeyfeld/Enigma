@@ -43,6 +43,9 @@ class PlayState extends FlxState
 	var enemies:FlxTypedGroup<Enemy>;
 	var enemySpawnTimer:Float;
 
+	// Bullet Variables
+	var playerBullets:FlxTypedGroup<Bullet>;
+
 	override public function create()
 	{
 		// HUD Declaration
@@ -53,6 +56,7 @@ class PlayState extends FlxState
 		// World Setup
 		// FlxG.worldBounds = new FlxRect(0, 0, 1023, 1023);
 
+		// World creation
 		map = new FlxOgmo3Loader(AssetPaths.enigma__ogmo, AssetPaths.level1__json);
 		walls = map.loadTilemap(AssetPaths.TX_Tileset_Grass__png, "walls");
 		ground = map.loadTilemap(AssetPaths.TX_Tileset_Grass__png, "ground");
@@ -61,16 +65,24 @@ class PlayState extends FlxState
 		add(ground);
 		add(walls);
 
+		// Coins
 		coins = new FlxTypedGroup<Coin>();
 		add(coins);
 
+		// Enemy
 		enemySpawnTimer = 100;
 		enemies = new FlxTypedGroup<Enemy>();
 		add(enemies);
 
+		// Player
 		player = new Player();
 		add(player);
 		add(hud);
+
+		// Bullets
+		playerBullets = new FlxTypedGroup<Bullet>();
+		add(playerBullets);
+
 		// playerCamera = new FlxCamera(cast(player.x, Int), cast(player.y, Int), 16, 16, 1);
 		// FlxG.camera.setPosition(player.x, player.y);
 		// deadzoneTight = FlxRect.get((FlxG.width - player.width) / 2, (FlxG.height - player.height) / 2, player.width, player.height);
@@ -155,6 +167,17 @@ class PlayState extends FlxState
 		}
 		enemySpawnTimer -= 1;
 		enemies.forEachAlive(checkEnemyVision);
+
+		// Bullet logic
+		for (weapon in player.weapons)
+		{
+			if (weapon.bulletType.timer <= 0)
+			{
+				var bullet = weapon.createBullet(player.x, player.y);
+				playerBullets.add(bullet);
+				weapon.bulletType.timer = weapon.bulletType.cooldown;
+			}
+		}
 	}
 
 	function checkEnemyVision(enemy:Enemy)
