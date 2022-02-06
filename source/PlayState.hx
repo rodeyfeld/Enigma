@@ -7,7 +7,10 @@ import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxRandom;
+import flixel.math.FlxRect;
 import flixel.tile.FlxTilemap;
+import flixel.ui.FlxBar;
+import flixel.util.FlxColor;
 
 class PlayState extends FlxState
 {
@@ -29,7 +32,12 @@ class PlayState extends FlxState
 	var randomY = new FlxRandom();
 	var randomChance = new FlxRandom();
 	// Camera Variables
-	var mainCam:FlxCamera;
+	var playerCamera:FlxCamera;
+	var deadZoneMouse:FlxRect;
+	var deadZoneTight:FlxRect;
+
+	// UI Variables
+	var healthBar:FlxBar;
 
 	override public function create()
 	{
@@ -55,10 +63,20 @@ class PlayState extends FlxState
 		player = new Player();
 		add(player);
 		add(hud);
-		FlxG.camera.follow(player, LOCKON, 1);
-		// mainCam = new FlxCamera(cast(player.x, Int), cast(player.y, Int), 16, 16, 1);
+		// playerCamera = new FlxCamera(cast(player.x, Int), cast(player.y, Int), 16, 16, 1);
 		// FlxG.camera.setPosition(player.x, player.y);
+		// deadzoneTight = FlxRect.get((FlxG.width - player.width) / 2, (FlxG.height - player.height) / 2, player.width, player.height);
+		deadZoneMouse = FlxRect.get(0, 0, FlxG.mouse.x, FlxG.mouse.y);
+		deadZoneTight = FlxRect.get(0, 0, player.x, player.y);
+		FlxG.camera.follow(player);
+		FlxG.camera.deadzone = deadZoneTight;
+
 		map.loadEntities(placeEntities, "entities");
+
+		healthBar = new FlxBar(0, 0, LEFT_TO_RIGHT, 20, 6, player, "health", 0, 100, true);
+		healthBar.createFilledBar(FlxColor.RED, FlxColor.GREEN, true);
+		healthBar.trackParent(-6, 15);
+		add(healthBar);
 	}
 
 	function placeEntities(entity:EntityData)
@@ -87,6 +105,11 @@ class PlayState extends FlxState
 		if (randomChance.bool(10))
 		{
 			coins.add(new Coin(randomX.int(1, cast(walls.width, Int)), randomY.int(1, cast(walls.height, Int))));
+		}
+		trace("x difference is: ", Math.abs(player.x - FlxG.mouse.x), "y difference is:", Math.abs(player.y - FlxG.mouse.y));
+		if (Math.abs(player.x - FlxG.mouse.x) > 50 || Math.abs(player.y - FlxG.mouse.y) > 50)
+		{
+			FlxG.camera.deadzone = deadZoneMouse;
 		}
 	}
 }

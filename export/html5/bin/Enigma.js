@@ -912,7 +912,7 @@ ApplicationMain.main = function() {
 ApplicationMain.create = function(config) {
 	var app = new openfl_display_Application();
 	ManifestResources.init(config);
-	app.meta.h["build"] = "4";
+	app.meta.h["build"] = "5";
 	app.meta.h["company"] = "HaxeFlixel";
 	app.meta.h["file"] = "Enigma";
 	app.meta.h["name"] = "Enigma";
@@ -8033,14 +8033,17 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 	,randomX: null
 	,randomY: null
 	,randomChance: null
-	,mainCam: null
+	,playerCamera: null
+	,deadZoneMouse: null
+	,deadZoneTight: null
+	,healthBar: null
 	,create: function() {
 		this.hud = new HUD();
 		flixel_FlxState.prototype.create.call(this);
 		this.map = new flixel_addons_editors_ogmo_FlxOgmo3Loader("assets/data/enigma.ogmo","assets/data/level1.json");
 		this.walls = this.map.loadTilemap("assets/images/TX_Tileset_Grass.png","walls");
 		this.ground = this.map.loadTilemap("assets/images/TX_Tileset_Grass.png","ground");
-		haxe_Log.trace(this.walls.widthInTiles,{ fileName : "source/PlayState.hx", lineNumber : 47, className : "PlayState", methodName : "create", customParams : [this.walls.get_width()]});
+		haxe_Log.trace(this.walls.widthInTiles,{ fileName : "source/PlayState.hx", lineNumber : 55, className : "PlayState", methodName : "create", customParams : [this.walls.get_width()]});
 		var _this = flixel_FlxG.worldBounds;
 		var X = 0;
 		var Y = 0;
@@ -8069,8 +8072,93 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		this.player = new Player();
 		this.add(this.player);
 		this.add(this.hud);
-		flixel_FlxG.camera.follow(this.player,flixel_FlxCameraFollowStyle.LOCKON,1);
+		var X = 0;
+		var Y = 0;
+		var Width = flixel_FlxG.mouse.x;
+		var Height = flixel_FlxG.mouse.y;
+		if(Height == null) {
+			Height = 0;
+		}
+		if(Width == null) {
+			Width = 0;
+		}
+		if(Y == null) {
+			Y = 0;
+		}
+		if(X == null) {
+			X = 0;
+		}
+		var _this = flixel_math_FlxRect._pool.get();
+		var X1 = X;
+		var Y1 = Y;
+		var Width1 = Width;
+		var Height1 = Height;
+		if(Height1 == null) {
+			Height1 = 0;
+		}
+		if(Width1 == null) {
+			Width1 = 0;
+		}
+		if(Y1 == null) {
+			Y1 = 0;
+		}
+		if(X1 == null) {
+			X1 = 0;
+		}
+		_this.x = X1;
+		_this.y = Y1;
+		_this.width = Width1;
+		_this.height = Height1;
+		var rect = _this;
+		rect._inPool = false;
+		this.deadZoneMouse = rect;
+		var X = 0;
+		var Y = 0;
+		var Width = this.player.x;
+		var Height = this.player.y;
+		if(Height == null) {
+			Height = 0;
+		}
+		if(Width == null) {
+			Width = 0;
+		}
+		if(Y == null) {
+			Y = 0;
+		}
+		if(X == null) {
+			X = 0;
+		}
+		var _this = flixel_math_FlxRect._pool.get();
+		var X1 = X;
+		var Y1 = Y;
+		var Width1 = Width;
+		var Height1 = Height;
+		if(Height1 == null) {
+			Height1 = 0;
+		}
+		if(Width1 == null) {
+			Width1 = 0;
+		}
+		if(Y1 == null) {
+			Y1 = 0;
+		}
+		if(X1 == null) {
+			X1 = 0;
+		}
+		_this.x = X1;
+		_this.y = Y1;
+		_this.width = Width1;
+		_this.height = Height1;
+		var rect = _this;
+		rect._inPool = false;
+		this.deadZoneTight = rect;
+		flixel_FlxG.camera.follow(this.player);
+		flixel_FlxG.camera.deadzone = this.deadZoneTight;
 		this.map.loadEntities($bind(this,this.placeEntities),"entities");
+		this.healthBar = new flixel_ui_FlxBar(0,0,flixel_ui_FlxBarFillDirection.LEFT_TO_RIGHT,20,6,this.player,"health",0,100,true);
+		this.healthBar.createFilledBar(-65536,-16744448,true);
+		this.healthBar.trackParent(-6,15);
+		this.add(this.healthBar);
 	}
 	,placeEntities: function(entity) {
 		if(entity.name == "player") {
@@ -8094,6 +8182,10 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		}
 		if(this.randomChance.float(0,100) < Chance) {
 			this.coins.add(new Coin(this.randomX.int(1,js_Boot.__cast(this.walls.get_width() , Int)),this.randomY.int(1,js_Boot.__cast(this.walls.get_height() , Int))));
+		}
+		haxe_Log.trace("x difference is: ",{ fileName : "source/PlayState.hx", lineNumber : 109, className : "PlayState", methodName : "update", customParams : [Math.abs(this.player.x - flixel_FlxG.mouse.x),"y difference is:",Math.abs(this.player.y - flixel_FlxG.mouse.y)]});
+		if(Math.abs(this.player.x - flixel_FlxG.mouse.x) > 50 || Math.abs(this.player.y - flixel_FlxG.mouse.y) > 50) {
+			flixel_FlxG.camera.deadzone = this.deadZoneMouse;
 		}
 	}
 	,__class__: PlayState
@@ -73725,7 +73817,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 257481;
+	this.version = 290942;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
