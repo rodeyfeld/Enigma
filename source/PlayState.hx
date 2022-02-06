@@ -83,10 +83,10 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 		FlxG.collide(player, walls);
-		FlxG.collide(player, coins, playerTouchCoin);
+		FlxG.overlap(player, coins, playerTouchCoin);
 		if (randomChance.bool(10))
 		{
-			coins.add(new Coin(randomX.int(1, 1024), randomY.int(1, 1024)));
+			coins.add(new Coin(randomX.int(1, cast(walls.width, Int)), randomY.int(1, cast(walls.height, Int))));
 		}
 	}
 }
