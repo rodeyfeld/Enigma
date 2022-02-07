@@ -1,6 +1,5 @@
 package;
 
-import BulletType;
 import Weapon;
 import flixel.FlxG;
 import flixel.FlxObject;

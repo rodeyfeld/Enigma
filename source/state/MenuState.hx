@@ -1,11 +1,11 @@
-package;
+package state;
 
-import OptionsState;
-import PlayState;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
+import state.OptionsState;
+import state.PlayState;
 
 class MenuState extends FlxState
 {

@@ -1,4 +1,4 @@
-package;
+package state;
 
 import flixel.FlxCamera;
 import flixel.FlxG;
@@ -60,7 +60,6 @@ class PlayState extends FlxState
 		map = new FlxOgmo3Loader(AssetPaths.enigma__ogmo, AssetPaths.level1__json);
 		walls = map.loadTilemap(AssetPaths.TX_Tileset_Grass__png, "walls");
 		ground = map.loadTilemap(AssetPaths.TX_Tileset_Grass__png, "ground");
-		trace(walls.widthInTiles, walls.width);
 		FlxG.worldBounds.set(0, 0, walls.width, walls.height);
 		add(ground);
 		add(walls);
@@ -173,10 +172,11 @@ class PlayState extends FlxState
 		{
 			if (weapon.bulletType.timer <= 0)
 			{
-				var bullet = weapon.createBullet(player.x, player.y);
+				var bullet = weapon.createBullet(player.x, player.y, player.angle);
 				playerBullets.add(bullet);
 				weapon.bulletType.timer = weapon.bulletType.cooldown;
 			}
+			weapon.bulletType.timer -= 1;
 		}
 	}
 

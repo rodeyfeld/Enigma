@@ -4,16 +4,15 @@ import flixel.FlxSprite;
 
 class Bullet extends FlxSprite
 {
-	public function new(x, y, bulletType)
+	public function new(playerX, playerY, playerAngle, bulletType)
 	{
-		super(x, y);
+		super(playerX, playerY);
 		loadGraphic(bulletType.graphic, true, bulletType.width, bulletType.height);
-		// var _animations = bulletType.;
-		setSize(16, 16);
-		trace(bulletType);
+		trace(playerAngle);
+
 		for (i in 0...bulletType.animations.length)
 		{
-			trace("hi", bulletType.animations[i]);
+			trace(bulletType.animations[i]);
 		}
 	}
 }
