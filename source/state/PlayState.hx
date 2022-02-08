@@ -1,4 +1,4 @@
-package;
+package state;
 
 import flixel.FlxCamera;
 import flixel.FlxG;
@@ -42,6 +42,9 @@ class PlayState extends FlxState
 	var enemies:FlxTypedGroup<Enemy>;
 	var enemySpawnTimer:Float;
 
+	// Bullet Variables
+	var playerBullets:FlxTypedGroup<Bullet>;
+
 	override public function create()
 	{
 		// HUD Declaration
@@ -52,30 +55,36 @@ class PlayState extends FlxState
 		// World Setup
 		// FlxG.worldBounds = new FlxRect(0, 0, 1023, 1023);
 
+		// World creation
 		map = new FlxOgmo3Loader(AssetPaths.enigma__ogmo, AssetPaths.level1__json);
 		walls = map.loadTilemap(AssetPaths.TX_Tileset_Grass__png, "walls");
 		ground = map.loadTilemap(AssetPaths.TX_Tileset_Grass__png, "ground");
-		trace(walls.widthInTiles, walls.width);
 		FlxG.worldBounds.set(0, 0, walls.width, walls.height);
 		add(ground);
 		add(walls);
 
+		// Coins
 		coins = new FlxTypedGroup<Coin>();
 		add(coins);
 
+		// Enemy
 		enemySpawnTimer = 100;
 		enemies = new FlxTypedGroup<Enemy>();
 		add(enemies);
 
+		// Player
 		player = new Player();
 		add(player);
 		add(hud);
-
 
 		// add cam anchor (or follow point or whatever) and make the camera follow it
 		camAnchor = new FlxObject();
 		add(camAnchor);
 		FlxG.camera.follow(camAnchor, LOCKON, 0.2);
+
+		// Bullets
+		playerBullets = new FlxTypedGroup<Bullet>();
+		add(playerBullets);
 
 		map.loadEntities(placeEntities, "entities");
 
@@ -161,6 +170,18 @@ class PlayState extends FlxState
 		}
 		enemySpawnTimer -= 1;
 		enemies.forEachAlive(checkEnemyVision);
+
+		// Bullet logic
+		for (weapon in player.weapons)
+		{
+			if (weapon.bulletType.timer <= 0)
+			{
+				var bullet = weapon.createBullet(player.x, player.y, player.angle);
+				playerBullets.add(bullet);
+				weapon.bulletType.timer = weapon.bulletType.cooldown;
+			}
+			weapon.bulletType.timer -= 1;
+		}
 	}
 
 	function checkEnemyVision(enemy:Enemy)

@@ -1,6 +1,6 @@
 package;
 
-import BulletType;
+import Weapon;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -22,7 +22,6 @@ class Player extends FlxSprite
 		animation.add("d", [0, 1, 2], 6, false);
 		animation.add("lr", [15, 16, 17], 6, false);
 		animation.add("u", [45, 46, 47], 6, false);
-		setSize(16, 16);
 		drag.x = drag.y = 1600;
 		offset.set(4, 4);
 

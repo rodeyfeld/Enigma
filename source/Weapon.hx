@@ -12,8 +12,9 @@ class Weapon
 		this.bulletType = bulletType;
 	}
 
-	function fireBullet()
+	public function createBullet(playerY, playerY, playerAngle)
 	{
-		var bullet = new Bullet(bulletType);
+		var bullet = new Bullet(playerY, playerY, playerAngle, bulletType);
+		return bullet;
 	}
 }

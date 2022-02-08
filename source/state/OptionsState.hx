@@ -1,6 +1,5 @@
-package;
+package state;
 
-import MenuState;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.text.FlxText;
@@ -9,6 +8,7 @@ import flixel.ui.FlxButton;
 import flixel.util.FlxAxes;
 import flixel.util.FlxColor;
 import flixel.util.FlxSave;
+import state.MenuState;
 
 class OptionsState extends FlxState
 {
