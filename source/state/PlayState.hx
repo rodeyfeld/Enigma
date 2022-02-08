@@ -2,12 +2,13 @@ package state;
 
 import flixel.FlxCamera;
 import flixel.FlxG;
-import flixel.FlxState;
 import flixel.FlxObject;
 import flixel.FlxSprite;
+import flixel.FlxState;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
+import flixel.math.FlxAngle;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRandom;
 import flixel.math.FlxRect;
@@ -44,6 +45,7 @@ class PlayState extends FlxState
 
 	// Bullet Variables
 	var playerBullets:FlxTypedGroup<Bullet>;
+	var fireAngle:Float;
 
 	override public function create()
 	{
@@ -82,10 +84,6 @@ class PlayState extends FlxState
 		add(camAnchor);
 		FlxG.camera.follow(camAnchor, LOCKON, 0.2);
 
-		// Bullets
-		playerBullets = new FlxTypedGroup<Bullet>();
-		add(playerBullets);
-
 		map.loadEntities(placeEntities, "entities");
 
 		healthBar = new FlxBar(0, 0, LEFT_TO_RIGHT, 20, 6, player, "health", 0, 100, true);
@@ -109,6 +107,20 @@ class PlayState extends FlxState
 			coin.kill();
 			money++;
 			hud.updateHUD(health, money);
+		}
+	}
+
+	function bulletTouchEnemy(enemy:Enemy, bullet:Bullet)
+	{
+		trace(bullet);
+		if (bullet.alive && bullet.exists && enemy.alive && enemy.exists)
+		{
+			enemy.health -= 1;
+			bullet.kill();
+			if (enemy.health <= 0)
+			{
+				enemy.kill();
+			}
 		}
 	}
 
@@ -144,6 +156,13 @@ class PlayState extends FlxState
 		FlxG.collide(enemies);
 		FlxG.collide(enemies, player);
 		FlxG.overlap(player, coins, playerTouchCoin);
+		for (weapon in player.weapons)
+		{
+			for (bullet in weapon.bullets)
+			{
+				FlxG.overlap(bullet, enemies, bulletTouchEnemy);
+			}
+		}
 
 		// Pickup spawning logic
 		if (randomChance.bool(10))
@@ -151,7 +170,7 @@ class PlayState extends FlxState
 			coins.add(new Coin(randomX.int(1, cast(walls.width, Int)), randomY.int(1, cast(walls.height, Int))));
 		}
 
-		// Camera Update Logic 
+		// Camera Update Logic
 		var diffX = FlxG.mouse.screenX - (FlxG.width / 2);
 		var diffY = FlxG.mouse.screenY - (FlxG.height / 2);
 		var angle = Math.atan2(diffY, diffX);
@@ -176,9 +195,15 @@ class PlayState extends FlxState
 		{
 			if (weapon.bulletType.timer <= 0)
 			{
-				var bullet = weapon.createBullet(player.x, player.y, player.angle);
-				playerBullets.add(bullet);
+				fireAngle = FlxAngle.angleBetweenMouse(player, true);
+				if (fireAngle > 360)
+				{
+					fireAngle -= 360;
+				}
+				weapon.createBullet(player.x, player.y, fireAngle);
 				weapon.bulletType.timer = weapon.bulletType.cooldown;
+				add(weapon.bullets);
+				trace(weapon.bullets);
 			}
 			weapon.bulletType.timer -= 1;
 		}

@@ -2,10 +2,10 @@ package;
 
 class AnimationMap
 {
-	var name:String;
-	var frames:Array<Int>;
-	var animated:Bool;
-	var framerate:Int;
+	public var name:String;
+	public var frames:Array<Int>;
+	public var animated:Bool;
+	public var framerate:Int;
 
 	public function new(name, frames, animated, framerate)
 	{

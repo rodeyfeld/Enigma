@@ -20,6 +20,7 @@ class Enemy extends FlxSprite
 	var brain:FSM;
 	var idleTimer:Float;
 	var moveDirection:Float;
+	var totalHealth:Float;
 
 	public var seesPlayer:Bool;
 	public var playerPosition:FlxPoint;
@@ -41,6 +42,8 @@ class Enemy extends FlxSprite
 		brain = new FSM(idle);
 		idleTimer = 0;
 		playerPosition = FlxPoint.get();
+		totalHealth = 4;
+		health = totalHealth;
 	}
 
 	function idle(elapsed:Float)
