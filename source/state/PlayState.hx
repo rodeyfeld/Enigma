@@ -110,12 +110,11 @@ class PlayState extends FlxState
 		}
 	}
 
-	function bulletTouchEnemy(enemy:Enemy, bullet:Bullet)
+	function bulletTouchEnemy(bullet:Bullet, enemy:Enemy)
 	{
-		trace(bullet);
 		if (bullet.alive && bullet.exists && enemy.alive && enemy.exists)
 		{
-			enemy.health -= 1;
+			enemy.health -= bullet.bulletType.damage;
 			bullet.kill();
 			if (enemy.health <= 0)
 			{
@@ -156,6 +155,8 @@ class PlayState extends FlxState
 		FlxG.collide(enemies);
 		FlxG.collide(enemies, player);
 		FlxG.overlap(player, coins, playerTouchCoin);
+
+		// Check for every weapon bullet colliding with an enemy
 		for (weapon in player.weapons)
 		{
 			for (bullet in weapon.bullets)
@@ -203,7 +204,6 @@ class PlayState extends FlxState
 				weapon.createBullet(player.x, player.y, fireAngle);
 				weapon.bulletType.timer = weapon.bulletType.cooldown;
 				add(weapon.bullets);
-				trace(weapon.bullets);
 			}
 			weapon.bulletType.timer -= 1;
 		}

@@ -42,7 +42,7 @@ class Enemy extends FlxSprite
 		brain = new FSM(idle);
 		idleTimer = 0;
 		playerPosition = FlxPoint.get();
-		totalHealth = 4;
+		totalHealth = 2;
 		health = totalHealth;
 	}
 

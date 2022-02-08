@@ -6,13 +6,13 @@ import flixel.math.FlxPoint;
 class Bullet extends FlxSprite
 {
 	public var bulletType:BulletType;
-	public var damage:Float;
+	public var test:Float;
 
 	public function new(playerX, playerY, fireAngle, bulletType)
 	{
 		this.bulletType = bulletType;
-		this.damage = bulletType.damage;
-		trace(damage);
+		this.test = 20;
+		// this.damage = bulletType.damage;
 		super(playerX, playerY);
 		loadGraphic(bulletType.graphic, true, bulletType.width, bulletType.height);
 		velocity.set(bulletType.move_speed);
