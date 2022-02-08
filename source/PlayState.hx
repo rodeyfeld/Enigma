@@ -3,6 +3,8 @@ package;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxState;
+import flixel.FlxObject;
+import flixel.FlxSprite;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
@@ -32,10 +34,7 @@ class PlayState extends FlxState
 	var randomY = new FlxRandom();
 	var randomChance = new FlxRandom();
 	// Camera Variables
-	var playerCamera:FlxCamera;
-	var deadZoneMouse:FlxRect;
-	var deadZoneTight:FlxRect;
-
+	var camAnchor:FlxObject;
 	// UI Variables
 	var healthBar:FlxBar;
 	var mainCam:FlxCamera;
@@ -71,13 +70,12 @@ class PlayState extends FlxState
 		player = new Player();
 		add(player);
 		add(hud);
-		// playerCamera = new FlxCamera(cast(player.x, Int), cast(player.y, Int), 16, 16, 1);
-		// FlxG.camera.setPosition(player.x, player.y);
-		// deadzoneTight = FlxRect.get((FlxG.width - player.width) / 2, (FlxG.height - player.height) / 2, player.width, player.height);
-		deadZoneMouse = FlxRect.get(0, 0, FlxG.mouse.x, FlxG.mouse.y);
-		deadZoneTight = FlxRect.get(0, 0, player.x, player.y);
-		FlxG.camera.follow(player);
-		// FlxG.camera.deadzone = deadZoneTight;
+
+
+		// add cam anchor (or follow point or whatever) and make the camera follow it
+		camAnchor = new FlxObject();
+		add(camAnchor);
+		FlxG.camera.follow(camAnchor, LOCKON, 0.2);
 
 		map.loadEntities(placeEntities, "entities");
 
@@ -134,6 +132,8 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 		FlxG.collide(player, walls);
+		FlxG.collide(enemies);
+		FlxG.collide(enemies, player);
 		FlxG.overlap(player, coins, playerTouchCoin);
 
 		// Pickup spawning logic
@@ -141,11 +141,17 @@ class PlayState extends FlxState
 		{
 			coins.add(new Coin(randomX.int(1, cast(walls.width, Int)), randomY.int(1, cast(walls.height, Int))));
 		}
-		// trace("x difference is: ", Math.abs(player.x - FlxG.mouse.x), "y difference is:", Math.abs(player.y - FlxG.mouse.y));
-		// if (Math.abs(player.x - FlxG.mouse.x) > 50 || Math.abs(player.y - FlxG.mouse.y) > 50)
-		// {
-		// 	FlxG.camera.deadzone = deadZoneMouse;
-		// }
+
+		// Camera Update Logic 
+		var diffX = FlxG.mouse.screenX - (FlxG.width / 2);
+		var diffY = FlxG.mouse.screenY - (FlxG.height / 2);
+		var angle = Math.atan2(diffY, diffX);
+		var distance = Math.sqrt(diffX * diffX + diffY * diffY);
+		distance *= 0.2;
+		var distanceX = Math.cos(angle) * distance;
+		var distanceY = Math.sin(angle) * distance;
+		camAnchor.x = distanceX + player.x;
+		camAnchor.y = distanceY + player.y;
 
 		// Enemy spawining logic
 		if (enemySpawnTimer <= 0)
