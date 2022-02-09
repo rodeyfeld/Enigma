@@ -125,6 +125,7 @@ class PlayState extends FlxState
 
 	function spawnEnemy()
 	{
+		// Spawning logic
 		var randomGenerator = new FlxRandom();
 
 		var halfCameraHeight = camera.height / 2;
@@ -142,8 +143,10 @@ class PlayState extends FlxState
 		var spawnPoints = [northSpawn, eastSpawn, southSpawn, westSpawn];
 		var spawnPoint = spawnPoints[randomGenerator.int(0, spawnPoints.length - 1)];
 		var enemy = new Enemy(spawnPoint[0], spawnPoint[1], Enemy.EnemyType.REGULAR);
+
 		if (!walls.overlaps(enemy))
 		{
+			add(enemy.enemyHealthBar);
 			enemies.add(enemy);
 		}
 	}

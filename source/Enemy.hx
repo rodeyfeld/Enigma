@@ -5,6 +5,8 @@ import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;
 import flixel.math.FlxVelocity;
+import flixel.ui.FlxBar;
+import flixel.util.FlxColor;
 
 enum EnemyType
 {
@@ -20,8 +22,10 @@ class Enemy extends FlxSprite
 	var brain:FSM;
 	var idleTimer:Float;
 	var moveDirection:Float;
-	var totalHealth:Float;
 
+	public var enemyHealthBar:FlxBar;
+
+	public var totalHealth:Float;
 	public var seesPlayer:Bool;
 	public var playerPosition:FlxPoint;
 
@@ -42,8 +46,12 @@ class Enemy extends FlxSprite
 		brain = new FSM(idle);
 		idleTimer = 0;
 		playerPosition = FlxPoint.get();
-		totalHealth = 2;
+		totalHealth = 4;
 		health = totalHealth;
+		// TODO: Move this somewhere else?
+		enemyHealthBar = new FlxBar(x, y, LEFT_TO_RIGHT, 20, 6, this, "health", 0, totalHealth, true);
+		enemyHealthBar.createFilledBar(FlxColor.RED, FlxColor.GREEN, true);
+		enemyHealthBar.trackParent(-6, 15);
 	}
 
 	function idle(elapsed:Float)
@@ -119,5 +127,11 @@ class Enemy extends FlxSprite
 		}
 		brain.update(elapsed);
 		super.update(elapsed);
+	}
+
+	override function kill()
+	{
+		enemyHealthBar.kill();
+		super.kill();
 	}
 }
