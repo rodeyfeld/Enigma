@@ -197,6 +197,7 @@ class PlayState extends FlxState
 		// Bullet logic
 		for (weapon in player.weapons)
 		{
+			trace(weapon.weaponType.weaponPattern);
 			if (weapon.bulletType.timer <= 0)
 			{
 				fireAngle = FlxAngle.angleBetweenMouse(player, true);
@@ -204,7 +205,10 @@ class PlayState extends FlxState
 				{
 					fireAngle -= 360;
 				}
-				weapon.createBullet(player.x, player.y, fireAngle);
+				weapon.weaponType.startX = player.x;
+				weapon.weaponType.startY = player.y;
+				weapon.weaponType.fireAngle = fireAngle;
+				weapon.fireWeapon();
 				weapon.bulletType.timer = weapon.bulletType.cooldown;
 				add(weapon.bullets);
 			}

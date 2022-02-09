@@ -8,16 +8,13 @@ class Bullet extends FlxSprite
 	public var bulletType:BulletType;
 	public var test:Float;
 
-	public function new(playerX, playerY, fireAngle, bulletType)
+	public function new(startX, startY, fireAngle, bulletType)
 	{
 		this.bulletType = bulletType;
-		this.test = 20;
-		// this.damage = bulletType.damage;
-		super(playerX, playerY);
+		super(startX, startY);
 		loadGraphic(bulletType.graphic, true, bulletType.width, bulletType.height);
 		velocity.set(bulletType.move_speed);
 		velocity.rotate(FlxPoint.weak(0, 0), fireAngle);
-		// TODO: Formalize sprite oreintation, currently working for pointing up
 		angle = fireAngle + 90;
 
 		for (i in 0...bulletType.animations.length)

@@ -11,7 +11,9 @@ class Player extends FlxSprite
 	public static inline var RUN_SPEED:Int = 100;
 
 	public var weapons = new Array<Weapon>();
-	public var fireBallWeapon:Weapon;
+	public var fireBallBulletType:Fireball;
+	public var bulletBulletType:Shell;
+	public var shotWeaponType:Shot;
 
 	public function new(x:Float = 0, y:Float = 0)
 	{
@@ -27,9 +29,16 @@ class Player extends FlxSprite
 		offset.set(4, 4);
 
 		// Weapons
-		var bulletType = new Fireball();
-		var fireballWeapon = new Weapon(bulletType);
-		weapons.push(fireballWeapon);
+		// FIREBALL SHOT
+		var fireBallbulletType = new Fireball();
+		var shotWeaponPattern = new Shot(x, y, 0);
+		var fireBallShotWeapon = new Weapon(fireBallbulletType, shotWeaponPattern);
+		weapons.push(fireBallShotWeapon);
+		// SHELL FLAK
+		var shellbulletType = new Shell();
+		var flakWeaponPattern = new Flak(x, y, 0);
+		var shellFlakWeapon = new Weapon(shellbulletType, flakWeaponPattern);
+		weapons.push(shellFlakWeapon);
 	}
 
 	function updateMovement(elapsed:Float)
