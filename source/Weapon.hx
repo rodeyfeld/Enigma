@@ -21,44 +21,44 @@ class Weapon
 
 	public function fireWeapon()
 	{
-		if (weaponType.weaponPattern == WeaponPatterns.SHOT)
+		if (weaponType.params.weaponPattern == WeaponPatterns.SHOT)
 		{
 			createShot(weaponType, bulletType);
 		}
-		else if (weaponType.weaponPattern == WeaponPatterns.FLAK)
+		else if (weaponType.params.weaponPattern == WeaponPatterns.FLAK)
 		{
 			createFlak(weaponType, bulletType);
 		}
-		else if (weaponType.weaponPattern == WeaponPatterns.AURA)
+		else if (weaponType.params.weaponPattern == WeaponPatterns.AURA)
 		{
-			createAura(weaponType, bulletType, target);
+			// createAura(weaponType, bulletType, target);
 		}
 	}
 
-	public function createShot(weaponType, bulletType)
+	public function createShot(weaponType:WeaponType, bulletType:BulletType)
 	{
-		createBullet(weaponType.startX, weaponType.startY, weaponType.fireAngle);
+		createBullet(weaponType.params.startX, weaponType.params.startY, bulletType, weaponType.params.fireAngle);
 	}
 
-	public function createFlak(weaponType, bulletType)
+	public function createFlak(weaponType:WeaponType, bulletType:BulletType)
 	{
 		var randomGenerator = new FlxRandom();
 		var angleDirection = [1, -1];
-		for (i in 0...weaponType.magazine)
+
+		for (i in 0...weaponType.params.magazine)
 		{
-			// var newAngle = weaponType.fireAngle;
-			var newAngle = weaponType.fireAngle
-				+ (randomGenerator.float(0, weaponType.fireAngleVariance) * angleDirection[randomGenerator.int(0, angleDirection.length - 1)]);
-			createBullet(weaponType.startX, weaponType.startY, bulletType, newAngle);
+			var newAngle = weaponType.params.fireAngle
+				+ (randomGenerator.float(0, weaponType.params.fireAngleVariance) * angleDirection[randomGenerator.int(0, angleDirection.length - 1)]);
+			createBullet(weaponType.params.startX, weaponType.params.startY, bulletType, newAngle);
 		}
 	}
 
-	public function createAura(weaponType, bulletType, target)
+	public function createAura(weaponType:WeaponType, bulletType:BulletType)
 	{
-		createBullet(weaponType.startX, weaponType.startY, bulletType, weaponType.target);
+		// createBullet(weaponType.startX, weaponType.startY, bulletType, weaponType.target);
 	}
 
-	public function createBullet(startX, startY, bulletType, fireAngle = 0, target = null)
+	public function createBullet(startX, startY, bulletType, fireAngle:Float = 0)
 	{
 		var bullet = new Bullet(startX, startY, bulletType, fireAngle);
 		bullets.add(bullet);

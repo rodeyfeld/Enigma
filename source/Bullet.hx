@@ -8,16 +8,17 @@ class Bullet extends FlxSprite
 	public var bulletType:BulletType;
 	public var test:Float;
 
-	public function new(startX, startY, bulletType, fireAngle = 0, target = null)
+	public function new(startX, startY, bulletType, fireAngle:Float = 0, target = null)
 	{
+		trace(fireAngle);
 		this.bulletType = bulletType;
 		super(startX, startY);
 		loadGraphic(bulletType.graphic, true, bulletType.width, bulletType.height);
-		if (bulletType.target != null)
-		{
-			follow(target);
-		}
-		velocity.set(bulletType.move_speed);
+		// if (bulletType.target != null)
+		// {
+		// 	follow(target);
+		// }
+		velocity.set(bulletType.moveSpeed);
 		velocity.rotate(FlxPoint.weak(0, 0), fireAngle);
 		angle = fireAngle + 90;
 

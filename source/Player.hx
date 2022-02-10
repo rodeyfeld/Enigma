@@ -33,19 +33,19 @@ class Player extends FlxSprite
 		// Weapons
 		// FIREBALL SHOT
 		var fireBallbulletType = new Fireball();
-		var shotWeaponPattern = new Shot(x, y, 0);
+		var shotWeaponPattern = new Shot(x, y);
 		var fireBallShotWeapon = new Weapon(fireBallbulletType, shotWeaponPattern);
 		weapons.push(fireBallShotWeapon);
 		// SHELL FLAK
 		var shellbulletType = new Shell();
-		var flakWeaponPattern = new Flak(x, y, 0);
+		var flakWeaponPattern = new Flak(x, y);
 		var shellFlakWeapon = new Weapon(shellbulletType, flakWeaponPattern);
 		weapons.push(shellFlakWeapon);
 		// TOXICCIRCLE AURA
 		var toxicCircleBulletType = new ToxicCircle();
-		var auraWeaponType = new Aura(x, y, 16, this);
+		var auraWeaponType = new Aura(x, y);
 		var toxicCircleAuraWeapon = new Weapon(toxicCircleBulletType, auraWeaponType);
-		weapons.push(toxicCircleAuraWeapon);
+		// weapons.push(toxicCircleAuraWeapon);
 	}
 
 	function updateMovement(elapsed:Float)

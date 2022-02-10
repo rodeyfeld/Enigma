@@ -2,8 +2,13 @@ package weapontypes.weaponpatterns;
 
 class Shot extends Projectile
 {
-	public function new(startX, startY, fireAngle:Float)
+	public function new(startX, startY)
 	{
-		super(WeaponPatterns.SHOT, startX, startY, fireAngle);
+		super({
+			'weaponPattern': WeaponPatterns.SHOT,
+			'startX': startX,
+			'startY': startY,
+			'fireAngle': 0
+		});
 	}
 }

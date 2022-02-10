@@ -2,8 +2,12 @@ package weapontypes.weaponpatterns;
 
 class Aura extends Radial
 {
-	public function new(startX, startY, radius, target)
+	public function new(startX, startY)
 	{
-		super(WeaponPatterns.AURA, startX, startY, radius, target);
+		super({
+			'weaponPattern': WeaponPatterns.AURA,
+			'startX': startX,
+			'startY': startY,
+		});
 	}
 }

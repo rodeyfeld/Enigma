@@ -2,8 +2,15 @@ package weapontypes.weaponpatterns;
 
 class Flak extends Projectile
 {
-	public function new(startX, startY, fireAngle:Float, magazine:Int = 5, fireAngleVariance:Float = 50)
+	public function new(startX, startY)
 	{
-		super(WeaponPatterns.FLAK, startX, startY, fireAngle, magazine, fireAngleVariance);
+		super({
+			'weaponPattern': WeaponPatterns.FLAK,
+			'startX': startX,
+			'startY': startY,
+			'fireAngle': 0,
+			'magazine': 5,
+			'fireAngleVariance': 25
+		});
 	}
 }
