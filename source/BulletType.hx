@@ -10,8 +10,9 @@ class BulletType
 	public var animations:Array<AnimationMap>;
 	public var move_speed:Float;
 	public var damage:Float;
+	public var lifeSpan:Float;
 
-	public function new(graphic, width, height, cooldown, timer, animations, move_speed, damage)
+	public function new(graphic, width, height, cooldown, timer, animations, move_speed, damage, lifeSpan = 100)
 	{
 		this.graphic = graphic;
 		this.width = width;
@@ -21,5 +22,6 @@ class BulletType
 		this.animations = animations;
 		this.move_speed = move_speed;
 		this.damage = damage;
+		this.lifeSpan = lifeSpan;
 	}
 }

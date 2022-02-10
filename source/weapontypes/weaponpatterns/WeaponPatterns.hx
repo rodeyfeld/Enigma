@@ -4,4 +4,5 @@ enum WeaponPatterns
 {
 	SHOT;
 	FLAK;
+	AURA;
 }

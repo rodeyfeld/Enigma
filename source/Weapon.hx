@@ -29,11 +29,15 @@ class Weapon
 		{
 			createFlak(weaponType, bulletType);
 		}
+		else if (weaponType.weaponPattern == WeaponPatterns.AURA)
+		{
+			createAura(weaponType, bulletType, target);
+		}
 	}
 
 	public function createShot(weaponType, bulletType)
 	{
-		createBullet(weaponType.startX, weaponType.startY, weaponType.fireAngle, bulletType);
+		createBullet(weaponType.startX, weaponType.startY, weaponType.fireAngle);
 	}
 
 	public function createFlak(weaponType, bulletType)
@@ -45,13 +49,18 @@ class Weapon
 			// var newAngle = weaponType.fireAngle;
 			var newAngle = weaponType.fireAngle
 				+ (randomGenerator.float(0, weaponType.fireAngleVariance) * angleDirection[randomGenerator.int(0, angleDirection.length - 1)]);
-			createBullet(weaponType.startX, weaponType.startY, newAngle, bulletType);
+			createBullet(weaponType.startX, weaponType.startY, bulletType, newAngle);
 		}
 	}
 
-	public function createBullet(startX, startY, fireAngle, bulletType)
+	public function createAura(weaponType, bulletType, target)
 	{
-		var bullet = new Bullet(startX, startY, fireAngle, bulletType);
+		createBullet(weaponType.startX, weaponType.startY, bulletType, weaponType.target);
+	}
+
+	public function createBullet(startX, startY, bulletType, fireAngle = 0, target = null)
+	{
+		var bullet = new Bullet(startX, startY, bulletType, fireAngle);
 		bullets.add(bullet);
 	}
 }
