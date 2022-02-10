@@ -12,7 +12,7 @@ class BulletType
 	public var damage:Float;
 	public var lifeSpan:Float;
 
-	public function new(graphic, width, height, cooldown, timer, animations, moveSpeed, damage, lifeSpan = 100)
+	public function new(graphic, width, height, cooldown, timer, animations, moveSpeed, damage, lifeSpan = 2)
 	{
 		this.graphic = graphic;
 		this.width = width;

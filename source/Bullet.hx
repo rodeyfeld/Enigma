@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;
 
@@ -7,17 +8,16 @@ class Bullet extends FlxSprite
 {
 	public var bulletType:BulletType;
 	public var test:Float;
+	public var target:FlxObject;
+	public var lifeSpan:Float;
 
-	public function new(startX, startY, bulletType, fireAngle:Float = 0, target = null)
+	public function new(startX, startY, bulletType, fireAngle:Float = 0, target:FlxObject = null)
 	{
-		trace(fireAngle);
+		this.target = target;
+		this.lifeSpan = bulletType.lifeSpan;
 		this.bulletType = bulletType;
 		super(startX, startY);
 		loadGraphic(bulletType.graphic, true, bulletType.width, bulletType.height);
-		// if (bulletType.target != null)
-		// {
-		// 	follow(target);
-		// }
 		velocity.set(bulletType.moveSpeed);
 		velocity.rotate(FlxPoint.weak(0, 0), fireAngle);
 		angle = fireAngle + 90;
@@ -31,14 +31,21 @@ class Bullet extends FlxSprite
 
 	public override function update(elapsed:Float)
 	{
-		if (bulletType.lifeSpan >= 0)
+		if (target != null)
 		{
-			bulletType.lifeSpan -= elapsed;
+			trace(target);
+			x = target.x;
+			y = target.y;
+		}
+		if (lifeSpan >= 0)
+		{
+			lifeSpan -= elapsed;
 		}
 		else
 		{
 			kill();
 		}
+		trace(lifeSpan);
 		super.update(elapsed);
 	}
 }

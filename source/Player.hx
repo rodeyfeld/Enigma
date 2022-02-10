@@ -43,7 +43,7 @@ class Player extends FlxSprite
 		weapons.push(shellFlakWeapon);
 		// TOXICCIRCLE AURA
 		var toxicCircleBulletType = new ToxicCircle();
-		var auraWeaponType = new Aura(x, y);
+		var auraWeaponType = new Aura(x, y, this);
 		var toxicCircleAuraWeapon = new Weapon(toxicCircleBulletType, auraWeaponType);
 		// weapons.push(toxicCircleAuraWeapon);
 	}

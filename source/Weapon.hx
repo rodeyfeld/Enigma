@@ -31,7 +31,7 @@ class Weapon
 		}
 		else if (weaponType.params.weaponPattern == WeaponPatterns.AURA)
 		{
-			// createAura(weaponType, bulletType, target);
+			createAura(weaponType, bulletType);
 		}
 	}
 
@@ -55,7 +55,8 @@ class Weapon
 
 	public function createAura(weaponType:WeaponType, bulletType:BulletType)
 	{
-		// createBullet(weaponType.startX, weaponType.startY, bulletType, weaponType.target);
+		// var bullet = new Bullet(weaponType.params.startX, weaponType.params.startY, bulletType, weaponType.params.target);
+		// bullets.add(bullet);
 	}
 
 	public function createBullet(startX, startY, bulletType, fireAngle:Float = 0)
