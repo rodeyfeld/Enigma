@@ -11,8 +11,9 @@ class BulletType
 	public var moveSpeed:Float;
 	public var damage:Float;
 	public var lifeSpan:Float;
+	public var persist:Bool;
 
-	public function new(graphic, width, height, cooldown, timer, animations, moveSpeed, damage, lifeSpan = 2)
+	public function new(graphic, width, height, cooldown, timer, animations, moveSpeed, damage, lifeSpan = 2, persist = false)
 	{
 		this.graphic = graphic;
 		this.width = width;
@@ -23,5 +24,6 @@ class BulletType
 		this.moveSpeed = moveSpeed;
 		this.damage = damage;
 		this.lifeSpan = lifeSpan;
+		this.persist = persist;
 	}
 }

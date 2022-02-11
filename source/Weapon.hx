@@ -55,8 +55,11 @@ class Weapon
 
 	public function createAura(weaponType:WeaponType, bulletType:BulletType)
 	{
-		// var bullet = new Bullet(weaponType.params.startX, weaponType.params.startY, bulletType, weaponType.params.target);
-		// bullets.add(bullet);
+		var bullet = new Bullet(weaponType.params.startX, weaponType.params.startY, bulletType, weaponType.params.target);
+		bullet.setSize(32, 32);
+		bullet.scale.set(2, 2);
+		bullet.origin.set(12, 12);
+		bullets.add(bullet);
 	}
 
 	public function createBullet(startX, startY, bulletType, fireAngle:Float = 0)

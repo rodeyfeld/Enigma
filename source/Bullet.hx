@@ -18,22 +18,27 @@ class Bullet extends FlxSprite
 		this.bulletType = bulletType;
 		super(startX, startY);
 		loadGraphic(bulletType.graphic, true, bulletType.width, bulletType.height);
-		velocity.set(bulletType.moveSpeed);
-		velocity.rotate(FlxPoint.weak(0, 0), fireAngle);
-		angle = fireAngle + 90;
+		if (target == null)
+		{
+			velocity.set(bulletType.moveSpeed);
+			velocity.rotate(FlxPoint.weak(0, 0), fireAngle);
+			angle = fireAngle + 90;
+		}
 
 		for (i in 0...bulletType.animations.length)
 		{
 			var bulletTypeAnimation:AnimationMap = bulletType.animations[i];
-			animation.add(bulletTypeAnimation.name, bulletTypeAnimation.frames, bulletTypeAnimation.framerate, bulletTypeAnimation.animated);
+			trace(bulletTypeAnimation);
+			animation.add(bulletTypeAnimation.name, bulletTypeAnimation.frames, bulletTypeAnimation.framerate, bulletTypeAnimation.animated,
+				bulletTypeAnimation.looped);
 		}
+		animation.play("fire");
 	}
 
 	public override function update(elapsed:Float)
 	{
 		if (target != null)
 		{
-			trace(target);
 			x = target.x;
 			y = target.y;
 		}
@@ -41,11 +46,10 @@ class Bullet extends FlxSprite
 		{
 			lifeSpan -= elapsed;
 		}
-		else
+		else if (lifeSpan < -1)
 		{
 			kill();
 		}
-		trace(lifeSpan);
 		super.update(elapsed);
 	}
 }

@@ -115,7 +115,12 @@ class PlayState extends FlxState
 		if (bullet.alive && bullet.exists && enemy.alive && enemy.exists)
 		{
 			enemy.health -= bullet.bulletType.damage;
-			bullet.kill();
+
+			// Check if bullet should remain after colliding
+			if (!bullet.bulletType.persist)
+			{
+				bullet.kill();
+			}
 			if (enemy.health <= 0)
 			{
 				enemy.kill();
