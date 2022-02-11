@@ -6,15 +6,16 @@ class Fireball extends BulletType
 {
 	public function new()
 	{
-		var graphic = AssetPaths.fireball__png;
-		var height = 16;
-		var width = 16;
-		var cooldown = 50;
-		var timer = 10;
-		var moveSpeed = 100;
-		var animations = [new AnimationMap("fire", [0, 1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1], true, 6)];
-		var damage = 1;
-		super(graphic, width, height, cooldown, timer, animations, moveSpeed, damage);
+		super({
+			'graphic': AssetPaths.fireball__png,
+			'height': 16,
+			'width': 16,
+			'cooldown': 50,
+			'timer': 10,
+			'moveSpeed': 100,
+			'animations': [new AnimationMap("fire", [0, 1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1], true, 6)],
+			'damage': 1,
+		});
 	}
 	// function addReverseFrames(frames:Array<Int>)
 	// {
