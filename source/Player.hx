@@ -47,7 +47,7 @@ class Player extends FlxSprite
 		var toxicCircleAuraWeapon = new Weapon(auraWeaponPattern, toxicCircleBulletType);
 		weapons.push(toxicCircleAuraWeapon);
 		// LIGHTNING STRIKE
-		var lightningStrikeBulletType = new  LightningStrike();
+		var lightningStrikeBulletType = new LightningStrike();
 		var beamWeaponPattern = new Beam(x, y);
 		var lightningStrikeBeamWeapon = new Weapon(beamWeaponPattern, lightningStrikeBulletType);
 		weapons.push(lightningStrikeBeamWeapon);

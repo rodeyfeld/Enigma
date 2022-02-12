@@ -198,14 +198,14 @@ class PlayState extends FlxState
 		enemies.forEachAlive(checkEnemyVision);
 
 		// Bullet logic
-
+	}
 
 	function checkWeaponLogic(player:Player)
 	{
 		for (weapon in player.weapons)
 		{
-			weapon.updateAura(player);
-			
+			// weapon.updateAura(player);
+
 			if (weapon.bulletType.params.timer <= 0)
 			{
 				fireAngle = FlxAngle.angleBetweenMouse(player, true);
