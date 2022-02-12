@@ -198,25 +198,18 @@ class PlayState extends FlxState
 		enemies.forEachAlive(checkEnemyVision);
 
 		// Bullet logic
+
+
+	function checkWeaponLogic(player:Player)
+	{
 		for (weapon in player.weapons)
 		{
+			weapon.updateAura(player);
+			
 			if (weapon.bulletType.params.timer <= 0)
 			{
-				/*
-				currentTarget = player
-				for idx in range(len(magazine)):
-					enemies = getEnemiesOnScreen()
-					nextTarget = random.choice(enemies)
-					
-			
-				*/
-				var tempTargetX = FlxG.mouse.x;
-				var 
 				fireAngle = FlxAngle.angleBetweenMouse(player, true);
-				if (fireAngle > 360)
-				{
-					fireAngle -= 360;
-				}
+				fireAngle %= 360;
 				weapon.weaponType.params.startX = player.x;
 				weapon.weaponType.params.startY = player.y;
 				weapon.weaponType.params.fireAngle = fireAngle;

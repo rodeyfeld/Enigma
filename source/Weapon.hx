@@ -51,10 +51,12 @@ class Weapon
 
 		for (i in 0...weaponType.params.magazine)
 		{
+			var curAngle = weaponType.params.fireAngle;
 			var newAngle = weaponType.params.fireAngle
 				+ (randomGenerator.float(0, weaponType.params.fireAngleVariance) * angleDirection[randomGenerator.int(0, angleDirection.length - 1)]);
 			weaponType.params.fireAngle = newAngle;
 			createBullet(weaponType, bulletType);
+			weaponType.params.fireAngle = curAngle;
 		}
 	}
 
@@ -67,6 +69,10 @@ class Weapon
 		bullets.add(bullet);
 	}
 
+	public function updateAura()
+	{
+		bullets.forEach(function(weaponType.) sprite.scrollFactor.set(0, 0));
+	}
 	public function createBeam(weaponType:WeaponType, bulletType:BulletType)
 	{
 		var bullet = new Bullet(weaponType, bulletType);
