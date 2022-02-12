@@ -7,12 +7,15 @@ import flixel.math.FlxPoint;
 class Bullet extends FlxSprite
 {
 	public var bulletType:BulletType;
+	public var weaponType:WeaponType;
 	public var test:Float;
 	public var target:FlxObject;
 	public var lifeSpan:Float;
 
 	public function new(weaponType:WeaponType, bulletType:BulletType)
 	{
+		this.weaponType = weaponType;
+		this.bulletType = bulletType;
 		this.target = weaponType.params.target;
 		this.lifeSpan = bulletType.params.lifeSpan;
 		this.bulletType = bulletType;

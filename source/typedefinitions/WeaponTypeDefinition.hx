@@ -6,8 +6,8 @@ typedef WeaponTypeDefinition =
 {
 	public var ?weaponPattern:WeaponPatterns;
 	public var ?weaponType:WeaponTypes;
-	public var startX:Float;
-	public var startY:Float;
+	public var ?startX:Float;
+	public var ?startY:Float;
 	public var ?fireAngle:Float;
 	public var ?speed:Float;
 	public var ?magazine:Int;

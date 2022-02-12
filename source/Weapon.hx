@@ -41,7 +41,7 @@ class Weapon
 
 	public function createShot(weaponType:WeaponType, bulletType:BulletType)
 	{
-		createBullet(weaponType.params.startX, weaponType.params.startY, bulletType, weaponType.params.fireAngle);
+		createBullet(weaponType, bulletType);
 	}
 
 	public function createFlak(weaponType:WeaponType, bulletType:BulletType)
@@ -53,13 +53,14 @@ class Weapon
 		{
 			var newAngle = weaponType.params.fireAngle
 				+ (randomGenerator.float(0, weaponType.params.fireAngleVariance) * angleDirection[randomGenerator.int(0, angleDirection.length - 1)]);
-			createBullet(weaponType.params.startX, weaponType.params.startY, bulletType, newAngle);
+			weaponType.params.fireAngle = newAngle;
+			createBullet(weaponType, bulletType);
 		}
 	}
 
 	public function createAura(weaponType:WeaponType, bulletType:BulletType)
 	{
-		var bullet = new Bullet(weaponType.params.startX, weaponType.params.startY, bulletType, weaponType.params.target);
+		var bullet = new Bullet(weaponType, bulletType);
 		bullet.setSize(32, 32);
 		bullet.scale.set(2, 2);
 		bullet.origin.set(12, 12);
@@ -68,7 +69,7 @@ class Weapon
 
 	public function createBeam(weaponType:WeaponType, bulletType:BulletType)
 	{
-		var bullet = new Bullet(weaponType.params.startX, weaponType.params.startY, bulletType, weaponType.params.target);
+		var bullet = new Bullet(weaponType, bulletType);
 		bullet.setSize(32, 32);
 		bullet.scale.set(2, 2);
 		bullet.origin.set(12, 12);
@@ -77,7 +78,7 @@ class Weapon
 
 	public function createBullet(weaponType:WeaponType, bulletType:BulletType)
 	{
-		var bullet = new Bullet(startX, startY, bulletType, fireAngle);
+		var bullet = new Bullet(weaponType, bulletType);
 		bullets.add(bullet);
 	}
 }
