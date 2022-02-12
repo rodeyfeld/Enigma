@@ -69,10 +69,14 @@ class Weapon
 		bullets.add(bullet);
 	}
 
-	public function updateAura()
-	{
-		bullets.forEach(function(weaponType.) sprite.scrollFactor.set(0, 0));
-	}
+	// public function updateAura()
+	// {
+	// 	bullets.forEach(function(weaponType.) sprite.scrollFactor.set(0, 0));
+	// 	for(bullet in bullets){}
+	// }
+
+	public function updateTargetCoords() {}
+
 	public function createBeam(weaponType:WeaponType, bulletType:BulletType)
 	{
 		var bullet = new Bullet(weaponType, bulletType);
