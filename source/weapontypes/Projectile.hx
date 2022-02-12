@@ -7,4 +7,9 @@ class Projectile extends WeaponType
 		params.weaponType = WeaponTypes.PROJECTILE;
 		super(params);
 	}
+
+	override public function checkType()
+	{
+		trace("CALLED IN PROJECTILE");
+	}
 }

@@ -198,6 +198,7 @@ class PlayState extends FlxState
 		enemies.forEachAlive(checkEnemyVision);
 
 		// Bullet logic
+		checkWeaponLogic(player);
 	}
 
 	function checkWeaponLogic(player:Player)

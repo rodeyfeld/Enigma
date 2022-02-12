@@ -21,6 +21,7 @@ class Weapon
 
 	public function fireWeapon()
 	{
+		weaponType.checkType();
 		if (weaponType.params.weaponPattern == WeaponPatterns.SHOT)
 		{
 			createShot(weaponType, bulletType);

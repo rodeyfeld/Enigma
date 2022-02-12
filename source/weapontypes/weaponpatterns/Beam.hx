@@ -9,7 +9,12 @@ class Beam extends Projectile
 			'startX': startX,
 			'startY': startY,
 			'fireAngle': 0,
-            'magazine': 3,
+			'magazine': 3,
 		});
+	}
+
+	override public function checkType()
+	{
+		trace("CALLED IN BEAM");
 	}
 }
