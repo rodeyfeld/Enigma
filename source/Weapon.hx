@@ -12,11 +12,11 @@ class Weapon
 	public var weaponType:WeaponType;
 	public var bulletType:BulletType;
 
-	public function new(bulletType, weaponType)
+	public function new(weaponType:WeaponType, bulletType:BulletType)
 	{
 		this.bullets = new FlxTypedGroup<Bullet>();
-		this.bulletType = bulletType;
 		this.weaponType = weaponType;
+		this.bulletType = bulletType;
 	}
 
 	public function fireWeapon()
@@ -32,6 +32,10 @@ class Weapon
 		else if (weaponType.params.weaponPattern == WeaponPatterns.AURA)
 		{
 			createAura(weaponType, bulletType);
+		}
+		else if (weaponType.params.weaponPattern == WeaponPatterns.BEAM)
+		{
+			createBeam(weaponType, bulletType);
 		}
 	}
 
@@ -62,7 +66,16 @@ class Weapon
 		bullets.add(bullet);
 	}
 
-	public function createBullet(startX, startY, bulletType, fireAngle:Float = 0)
+	public function createBeam(weaponType:WeaponType, bulletType:BulletType)
+	{
+		var bullet = new Bullet(weaponType.params.startX, weaponType.params.startY, bulletType, weaponType.params.target);
+		bullet.setSize(32, 32);
+		bullet.scale.set(2, 2);
+		bullet.origin.set(12, 12);
+		bullets.add(bullet);
+	}
+
+	public function createBullet(weaponType:WeaponType, bulletType:BulletType)
 	{
 		var bullet = new Bullet(startX, startY, bulletType, fireAngle);
 		bullets.add(bullet);

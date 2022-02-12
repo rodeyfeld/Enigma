@@ -124,6 +124,10 @@ class PlayState extends FlxState
 			if (enemy.health <= 0)
 			{
 				enemy.kill();
+				if (randomChance.bool(50))
+				{
+					coins.add(new Coin(enemy.x, enemy.y));
+				}
 			}
 		}
 	}
@@ -173,12 +177,6 @@ class PlayState extends FlxState
 			}
 		}
 
-		// Pickup spawning logic
-		if (randomChance.bool(10))
-		{
-			coins.add(new Coin(randomX.int(1, cast(walls.width, Int)), randomY.int(1, cast(walls.height, Int))));
-		}
-
 		// Camera Update Logic
 		var diffX = FlxG.mouse.screenX - (FlxG.width / 2);
 		var diffY = FlxG.mouse.screenY - (FlxG.height / 2);
@@ -204,6 +202,16 @@ class PlayState extends FlxState
 		{
 			if (weapon.bulletType.params.timer <= 0)
 			{
+				/*
+				currentTarget = player
+				for idx in range(len(magazine)):
+					enemies = getEnemiesOnScreen()
+					nextTarget = random.choice(enemies)
+					
+			
+				*/
+				var tempTargetX = FlxG.mouse.x;
+				var 
 				fireAngle = FlxAngle.angleBetweenMouse(player, true);
 				if (fireAngle > 360)
 				{

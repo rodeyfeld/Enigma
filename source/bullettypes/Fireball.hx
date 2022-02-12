@@ -17,14 +17,4 @@ class Fireball extends BulletType
 			'damage': 1,
 		});
 	}
-	// function addReverseFrames(frames:Array<Int>)
-	// {
-	// 	var framesLength:Int = frames.length();
-	// 	var frameIndex:Int = framesLength;
-	// 	while (framesIndex >= 0)
-	// 	{
-	// 		frames.push(frames[frameIndex]);
-	// 		frameIndex += 1;
-	// 	}
-	// }
 }

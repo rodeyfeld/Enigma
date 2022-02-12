@@ -5,4 +5,5 @@ enum WeaponPatterns
 	SHOT;
 	FLAK;
 	AURA;
+	BEAM;
 }

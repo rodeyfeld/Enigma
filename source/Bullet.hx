@@ -11,24 +11,23 @@ class Bullet extends FlxSprite
 	public var target:FlxObject;
 	public var lifeSpan:Float;
 
-	public function new(startX, startY, bulletType, fireAngle:Float = 0, target:FlxObject = null)
+	public function new(weaponType:WeaponType, bulletType:BulletType)
 	{
-		this.target = target;
+		this.target = weaponType.params.target;
 		this.lifeSpan = bulletType.params.lifeSpan;
 		this.bulletType = bulletType;
-		super(startX, startY);
+		super(weaponType.params.startX, weaponType.params.startY);
 		loadGraphic(bulletType.params.graphic, true, bulletType.params.width, bulletType.params.height);
 		if (target == null)
 		{
 			velocity.set(bulletType.params.moveSpeed);
-			velocity.rotate(FlxPoint.weak(0, 0), fireAngle);
-			angle = fireAngle + 90;
+			velocity.rotate(FlxPoint.weak(0, 0), weaponType.params.fireAngle);
+			angle = weaponType.params.fireAngle + 90;
 		}
 
 		for (i in 0...bulletType.params.animations.length)
 		{
 			var bulletTypeAnimation:AnimationMap = bulletType.params.animations[i];
-			trace(bulletTypeAnimation);
 			animation.add(bulletTypeAnimation.name, bulletTypeAnimation.frames, bulletTypeAnimation.framerate, bulletTypeAnimation.animated,
 				bulletTypeAnimation.looped);
 		}
