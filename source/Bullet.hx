@@ -16,6 +16,7 @@ class Bullet extends FlxSprite
 	{
 		this.weaponType = weaponType;
 		this.bulletType = bulletType;
+		lifeSpan = bulletType.params.lifeSpan;
 		super(weaponType.params.startX, weaponType.params.startY);
 		loadGraphic(bulletType.params.graphic, true, bulletType.params.width, bulletType.params.height);
 		addAnimations(bulletType);
@@ -42,7 +43,9 @@ class Bullet extends FlxSprite
 		// }
 		if (lifeSpan >= 0)
 		{
+			trace(lifeSpan - elapsed);
 			lifeSpan -= elapsed;
+			trace(lifeSpan);
 		}
 		else if (lifeSpan < -1)
 		{
