@@ -33,10 +33,10 @@ class Player extends FlxSprite
 		// FIREBALL SHOT
 
 		var fireWand = new FireWand();
-		weapons.push(fireWand);
+		// weapons.push(fireWand);
 
 		var shotgun = new Shotgun();
-		weapons.push(shotgun);
+		// weapons.push(shotgun);
 
 		// var kineticAura = new KineticAura();
 		// weapons.push(kineticAura);

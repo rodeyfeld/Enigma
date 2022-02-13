@@ -30,8 +30,8 @@ class Shotgun extends Weapon
 	{
 		weaponType.params.startX = params['startX'];
 		weaponType.params.startY = params['startY'];
-		weaponType.params.destX = null;
-		weaponType.params.destY = null;
-		//weaponType.params.fireAngle = params.fireAngle;
+		// weaponType.params.destX = null;
+		// weaponType.params.destY = null;
+		weaponType.params.fireAngle = params['fireAngle'];
 	}
 }

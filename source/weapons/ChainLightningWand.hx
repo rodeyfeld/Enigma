@@ -11,7 +11,17 @@ class ChainLightningWand extends Weapon
 
 	override public function fireWeapon()
 	{
-		createBullet();
+		var randomGenerator = new FlxRandom();
+		var angleDirection = [1, -1];
+		for (i in 0...weaponType.params.magazine)
+		{
+			weaponType.params.startX = weaponType.params.destX;
+			weaponType.params.startY = weaponType.params.destY;
+			weaponType.params.destX =  randomenemyx
+			weaponType.params.destY =  randomenemyy
+			createBullet();
+			weaponType.params.fireAngle = curAngle;
+		}
 	}
 
 	override public function updateWeaponParams(params:Map<String, Float>)

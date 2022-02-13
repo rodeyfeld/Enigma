@@ -100,7 +100,9 @@ class PlayState extends FlxState
 		}
 		else if (entity.name == "enemy")
 		{
-			enemies.add(new Enemy(entity.x, entity.y, BOSS));
+			var enemy = new Enemy(entity.x, entity.y, BOSS);
+			enemies.add(enemy);
+			add(enemy.enemyHealthBar);
 		}
 	}
 
@@ -212,8 +214,14 @@ class PlayState extends FlxState
 			if (weapon.bulletType.params.timer <= 0)
 			{
 				fireAngle = FlxAngle.angleBetweenMouse(player, true) % 360;
-				//var targetEnemy:FlxObject = enemies.getFirstAlive();
-				var updatedWeaponParams:Map<String, Float> = ['startX' => player.x, 'startY' => player.y, 'destX' => FlxG.mouse.x, 'destY' => FlxG.mouse.y];
+				var targetEnemy:FlxObject = enemies.getFirstAlive();
+				var updatedWeaponParams:Map<String, Float> = [
+					'startX' => player.x,
+					'startY' => player.y,
+					'destX' => targetEnemy.x,
+					'destY' => targetEnemy.y,
+					'fireAngle' => fireAngle
+				];
 				weapon.updateWeaponParams(updatedWeaponParams);
 				weapon.fireWeapon();
 				weapon.bulletType.params.timer = weapon.bulletType.params.cooldown;
