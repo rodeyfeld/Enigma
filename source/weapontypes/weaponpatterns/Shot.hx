@@ -9,7 +9,7 @@ class Shot extends Projectile
 			'startX': startX,
 			'startY': startY,
 			'fireAngle': 0,
-			'magazine': 8
+			'magazine': 3
 		});
 	}
 }

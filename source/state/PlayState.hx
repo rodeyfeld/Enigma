@@ -174,15 +174,6 @@ class PlayState extends FlxState
 		FlxG.collide(enemies, player);
 		FlxG.overlap(player, coins, playerTouchCoin);
 
-		// Check for every weapon bullet colliding with an enemy
-		for (weapon in player.weapons)
-		{
-			for (bullet in weapon.bullets)
-			{
-				FlxG.overlap(bullet, enemies, bulletTouchEnemy);
-			}
-		}
-
 		// Camera Update Logic
 		var diffX = FlxG.mouse.screenX - (FlxG.width / 2);
 		var diffY = FlxG.mouse.screenY - (FlxG.height / 2);
@@ -223,11 +214,12 @@ class PlayState extends FlxState
 						'startY' => currentEnemy.y,
 						'fireAngle' => fireAngle
 					];
-
 					weapon.updateWeaponParams(updatedWeaponParams);
 					weapon.fireWeapon();
-					fireAngle = FlxAngle.angleBetween(currentEnemy, nextEnemy, true) % 360;
 					currentEnemy = nextEnemy;
+					var nextEnemy:FlxSprite = enemies.getRandom();
+					fireAngle = FlxAngle.angleBetween(currentEnemy, nextEnemy, true) % 360;
+
 
 				}
 				weapon.bulletType.params.timer = weapon.bulletType.params.cooldown;
@@ -236,6 +228,16 @@ class PlayState extends FlxState
 			weapon.bulletType.params.timer -= 1;
 		}
 	}
+
+	function checkBulletLogic(weapon:Weapon)
+	{
+		for (bullet in weapon.bullets)
+		{
+			FlxG.overlap(bullet, enemies, bulletTouchEnemy);
+		}
+	}
+
+	
 
 	function checkEnemyVision(enemy:Enemy)
 	{
