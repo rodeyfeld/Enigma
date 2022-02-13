@@ -58,7 +58,7 @@ class PlayState extends FlxState
 		// FlxG.worldBounds = new FlxRect(0, 0, 1023, 1023);
 
 		// World creation
-		map = new FlxOgmo3Loader(AssetPaths.enigma__ogmo, AssetPaths.level1__json);
+		map = new FlxOgmo3Loader(AssetPaths.enigma__ogmo, AssetPaths.sandbox__json);
 		walls = map.loadTilemap(AssetPaths.TX_Tileset_Grass__png, "walls");
 		ground = map.loadTilemap(AssetPaths.TX_Tileset_Grass__png, "ground");
 		FlxG.worldBounds.set(0, 0, walls.width, walls.height);
@@ -70,7 +70,7 @@ class PlayState extends FlxState
 		add(coins);
 
 		// Enemy
-		enemySpawnTimer = 100;
+		enemySpawnTimer = 10000000;
 		enemies = new FlxTypedGroup<Enemy>();
 		add(enemies);
 
@@ -97,6 +97,10 @@ class PlayState extends FlxState
 		if (entity.name == "player")
 		{
 			player.setPosition(entity.x, entity.y);
+		}
+		else if (entity.name == "enemy")
+		{
+			enemies.add(new Enemy(entity.x, entity.y, BOSS));
 		}
 	}
 

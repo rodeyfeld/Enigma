@@ -46,7 +46,7 @@ class Enemy extends FlxSprite
 		brain = new FSM(idle);
 		idleTimer = 0;
 		playerPosition = FlxPoint.get();
-		totalHealth = 4;
+		totalHealth = 100;
 		health = totalHealth;
 		// TODO: Move this somewhere else?
 		enemyHealthBar = new FlxBar(x, y, LEFT_TO_RIGHT, 20, 6, this, "health", 0, totalHealth, true);
@@ -58,7 +58,7 @@ class Enemy extends FlxSprite
 	{
 		if (seesPlayer)
 		{
-			brain.activeState = chase;
+			// brain.activeState = chase;
 		}
 		else if (idleTimer <= 0)
 		{
