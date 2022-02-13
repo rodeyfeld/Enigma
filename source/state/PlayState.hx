@@ -206,9 +206,9 @@ class PlayState extends FlxState
 			{
 				fireAngle = FlxAngle.angleBetweenMouse(player, true) % 360;
 				var currentEnemy:FlxSprite = player;
+				var nextEnemy:FlxSprite = enemies.getRandom();
 				for (i in 0...weapon.weaponType.params.magazine)
 				{
-					var nextEnemy:FlxSprite = enemies.getRandom();
 					var updatedWeaponParams:Map<String, Float> = [
 						'startX' => currentEnemy.x,
 						'startY' => currentEnemy.y,
@@ -217,7 +217,7 @@ class PlayState extends FlxState
 					weapon.updateWeaponParams(updatedWeaponParams);
 					weapon.fireWeapon();
 					currentEnemy = nextEnemy;
-					var nextEnemy:FlxSprite = enemies.getRandom();
+					nextEnemy = enemies.getRandom();
 					fireAngle = FlxAngle.angleBetween(currentEnemy, nextEnemy, true) % 360;
 
 
@@ -237,7 +237,7 @@ class PlayState extends FlxState
 		}
 	}
 
-	
+
 
 	function checkEnemyVision(enemy:Enemy)
 	{

@@ -2,14 +2,10 @@ package weapontypes.weaponpatterns;
 
 class Shot extends Projectile
 {
-	public function new(startX, startY)
+	public function new(params)
 	{
-		super({
-			'weaponPattern': WeaponPatterns.SHOT,
-			'startX': startX,
-			'startY': startY,
-			'fireAngle': 0,
-			'magazine': 3
-		});
+		params.weaponType = WeaponPatterns.SHOT;
+		super(params);
 	}
+	// override public function createBullet() {}
 }
