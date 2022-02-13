@@ -122,11 +122,11 @@ class PlayState extends FlxState
 		{
 			enemy.health -= bullet.bulletType.params.damage;
 
-			// Check if bullet should remain after colliding
-			// if (!bullet.bulletType.params.persist)
-			// {
-			// 	bullet.kill();
-			// }
+			//Check if bullet should remain after colliding
+			if (!bullet.bulletType.params.persist)
+			{
+				bullet.kill();
+			}
 			if (enemy.health <= 0)
 			{
 				enemy.kill();
@@ -214,18 +214,21 @@ class PlayState extends FlxState
 			if (weapon.bulletType.params.timer <= 0)
 			{
 				fireAngle = FlxAngle.angleBetweenMouse(player, true) % 360;
+				var currentEnemy:FlxSprite = player;
 				for (i in 0...weapon.weaponType.params.magazine)
 				{
-					var currentEnemy:FlxSprite = enemies.getRandom();
 					var nextEnemy:FlxSprite = enemies.getRandom();
 					var updatedWeaponParams:Map<String, Float> = [
-						'startX' => weapon.weaponType.params.destX,
-						'startY' => weapon.weaponType.params.destY,
+						'startX' => currentEnemy.x,
+						'startY' => currentEnemy.y,
 						'fireAngle' => fireAngle
 					];
+
 					weapon.updateWeaponParams(updatedWeaponParams);
 					weapon.fireWeapon();
-					fireAngle = FlxAngle.angleBetween(currentEnemy, nextEnemy) % 360;
+					fireAngle = FlxAngle.angleBetween(currentEnemy, nextEnemy, true) % 360;
+					currentEnemy = nextEnemy;
+
 				}
 				weapon.bulletType.params.timer = weapon.bulletType.params.cooldown;
 				add(weapon.bullets);

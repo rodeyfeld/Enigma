@@ -7,7 +7,7 @@ class ChainLightningWand extends Weapon
 	public function new()
 	{
 		var lightningStrikeBulletType = new LightningStrike();
-		var beamWeaponPattern = new Beam(0, 0);
+		var beamWeaponPattern = new Shot(0, 0);
 		super(beamWeaponPattern, lightningStrikeBulletType);
 	}
 

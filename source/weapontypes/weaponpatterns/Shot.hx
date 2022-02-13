@@ -8,7 +8,8 @@ class Shot extends Projectile
 			'weaponPattern': WeaponPatterns.SHOT,
 			'startX': startX,
 			'startY': startY,
-			'fireAngle': 0
+			'fireAngle': 0,
+			'magazine': 8
 		});
 	}
 }
