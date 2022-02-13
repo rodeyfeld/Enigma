@@ -1,7 +1,6 @@
 package typedefinitions;
 
 import flixel.FlxObject;
-import flixel.group.FlxGroup.FlxTypedGroup;
 
 typedef WeaponTypeDefinition =
 {
@@ -9,16 +8,11 @@ typedef WeaponTypeDefinition =
 	public var ?weaponType:WeaponTypes;
 	public var ?startX:Float;
 	public var ?startY:Float;
+	public var ?destX:Float;
+	public var ?destY:Float;
 	public var ?fireAngle:Float;
 	public var ?speed:Float;
 	public var ?magazine:Int;
 	public var ?fireAngleVariance:Float;
 	public var ?radius:Float;
-	public var ?targets:FlxTypedGroup<FlxObject>;
 }
-// redefine function to use the params typedef
-// funtion myFunc(params:MyFuncParams) {
-// logic and stuff
-// }
-// call it by passimg in an anonymous object with the typedef shape
-// myFunc({c: "Hello", a: 60});

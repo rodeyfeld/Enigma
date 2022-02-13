@@ -18,14 +18,19 @@ class Bullet extends FlxSprite
 		this.bulletType = bulletType;
 		super(weaponType.params.startX, weaponType.params.startY);
 		loadGraphic(bulletType.params.graphic, true, bulletType.params.width, bulletType.params.height);
+		addAnimations(bulletType);
 
-		for (i in 0...bulletType.params.animations.length)
+		if (weaponType.params.destX == null && weaponType.params.destY == null)
 		{
-			var bulletTypeAnimation:AnimationMap = bulletType.params.animations[i];
-			animation.add(bulletTypeAnimation.name, bulletTypeAnimation.frames, bulletTypeAnimation.framerate, bulletTypeAnimation.animated,
-				bulletTypeAnimation.looped);
+			velocity.set(bulletType.params.moveSpeed);
+			velocity.rotate(FlxPoint.weak(0, 0), weaponType.params.fireAngle);
+			angle = weaponType.params.fireAngle + 90;
 		}
-		animation.play("fire");
+		else
+		{
+			x = weaponType.params.destX;
+			y = weaponType.params.destY;
+		}
 	}
 
 	public override function update(elapsed:Float)
@@ -44,5 +49,16 @@ class Bullet extends FlxSprite
 			kill();
 		}
 		super.update(elapsed);
+	}
+
+	public function addAnimations(bulletType:BulletType)
+	{
+		for (i in 0...bulletType.params.animations.length)
+		{
+			var bulletTypeAnimation:AnimationMap = bulletType.params.animations[i];
+			animation.add(bulletTypeAnimation.name, bulletTypeAnimation.frames, bulletTypeAnimation.framerate, bulletTypeAnimation.animated,
+				bulletTypeAnimation.looped);
+		}
+		animation.play("fire");
 	}
 }

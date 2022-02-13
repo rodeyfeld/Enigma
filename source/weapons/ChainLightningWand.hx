@@ -13,4 +13,13 @@ class ChainLightningWand extends Weapon
 	{
 		createBullet();
 	}
+
+	override public function updateWeaponParams(params)
+	{
+		weaponType.params.startX = params.startX;
+		weaponType.params.startY = params.startY;
+		weaponType.params.destX = params.destX;
+		weaponType.params.destY = params.destY;
+		weaponType.params.fireAngle = null;
+	}
 }
