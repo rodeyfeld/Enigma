@@ -26,10 +26,12 @@ class Shotgun extends Weapon
 		}
 	}
 
-	override public function updateWeaponParams(params)
+	override public function updateWeaponParams(params:Map<String, Float>)
 	{
-		weaponType.params.startX = params.startX;
-		weaponType.params.startY = params.startY;
-		weaponType.params.fireAngle = params.fireAngle;
+		weaponType.params.startX = params['startX'];
+		weaponType.params.startY = params['startY'];
+		weaponType.params.destX = null;
+		weaponType.params.destY = null;
+		//weaponType.params.fireAngle = params.fireAngle;
 	}
 }

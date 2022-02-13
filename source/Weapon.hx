@@ -21,7 +21,7 @@ class Weapon
 
 	public function fireWeapon() {}
 
-	public function updateWeaponParams(params) {}
+	public function updateWeaponParams(params:Map<String, Float>) {}
 
 	public function createBullet()
 	{

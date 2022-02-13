@@ -208,22 +208,9 @@ class PlayState extends FlxState
 			if (weapon.bulletType.params.timer <= 0)
 			{
 				fireAngle = FlxAngle.angleBetweenMouse(player, true) % 360;
-				// if (weapon.weaponType.params.magazine > 0 && weapon.weaponType.params.targets.length > 0)
-				// {
-				// 	weapon.weaponType.params.targets.pop
-				// }
-				var targetEnemy:FlxObject = enemies.getFirstAlive();
-				weapon.updateWeaponParams({
-					'startX': player.x,
-					'startY': player.y,
-					'destX': targetEnemy.x,
-					'destY': targetEnemy.y,
-					'fireAngle': fireAngle,
-					// 'speed': weapon.weaponType.params.speed,
-					// 'magazine': weapon.weaponType.params.magazine,
-					// 'fireAngleVariance': weapon.weaponType.params.fireAngleVariance,
-					// 'radius': weapon.weaponType.params.radius,
-				});
+				//var targetEnemy:FlxObject = enemies.getFirstAlive();
+				var updatedWeaponParams:Map<String, Float> = ['startX' => player.x, 'startY' => player.y, 'destX' => FlxG.mouse.x, 'destY' => FlxG.mouse.y];
+				weapon.updateWeaponParams(updatedWeaponParams);
 				weapon.fireWeapon();
 				weapon.bulletType.params.timer = weapon.bulletType.params.cooldown;
 				add(weapon.bullets);
@@ -231,16 +218,6 @@ class PlayState extends FlxState
 			weapon.bulletType.params.timer -= 1;
 		}
 	}
-
-	// function getEnemyArrayByDistanceFromPoint()
-	// {
-	// 	var enemyDistanceDictionary = new Array<Map<Dynamic, Dynamic>>();
-	// 	for (enemy in enemies)
-	// 	{
-	// 		var enemyPoint:FlxPoint = enemy.getScreenPosition;
-	// 		enemyDistanceDictionary.push({enemy:})
-	// 	}
-	// }
 
 	function checkEnemyVision(enemy:Enemy)
 	{
