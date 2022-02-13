@@ -47,7 +47,7 @@ class Bullet extends FlxSprite
 			lifeSpan -= elapsed;
 			trace(lifeSpan);
 		}
-		else if (lifeSpan < -1)
+		else if (lifeSpan < 0 && lifeSpan > -1)
 		{
 			kill();
 		}
