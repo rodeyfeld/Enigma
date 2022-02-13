@@ -14,7 +14,7 @@ class Player extends FlxSprite
 	public var fireBallBulletType:Fireball;
 	public var bulletBulletType:Shell;
 	public var shotWeaponType:Shot;
-	public var toxicCircleBulletType:ToxicCircle;
+	public var EnergyCircleBulletType:EnergyCircle;
 	public var auraWeaponType:Aura;
 
 	public function new(x:Float = 0, y:Float = 0)
@@ -32,25 +32,33 @@ class Player extends FlxSprite
 
 		// Weapons
 		// FIREBALL SHOT
-		var fireBallbulletType = new Fireball();
-		var shotWeaponPattern = new Shot(x, y);
-		var fireBallShotWeapon = new Weapon(shotWeaponPattern, fireBallbulletType);
-		weapons.push(fireBallShotWeapon);
-		// SHELL FLAK
-		var shellbulletType = new Shell();
-		var flakWeaponPattern = new Flak(x, y);
-		var shellFlakWeapon = new Weapon(flakWeaponPattern, shellbulletType);
-		weapons.push(shellFlakWeapon);
-		// TOXICCIRCLE AURA
-		var toxicCircleBulletType = new ToxicCircle();
-		var auraWeaponPattern = new Aura(x, y, this);
-		var toxicCircleAuraWeapon = new Weapon(auraWeaponPattern, toxicCircleBulletType);
-		weapons.push(toxicCircleAuraWeapon);
-		// LIGHTNING STRIKE
-		var lightningStrikeBulletType = new LightningStrike();
-		var beamWeaponPattern = new Beam(x, y);
-		var lightningStrikeBeamWeapon = new Weapon(beamWeaponPattern, lightningStrikeBulletType);
-		weapons.push(lightningStrikeBeamWeapon);
+
+		// var fireBallbulletType = new Fireball();
+		// var shotWeaponPattern = new Shot(x, y);
+		// var fireBallShotWeapon = new Weapon(shotWeaponPattern, fireBallbulletType);
+		var fireWand = new FireWand();
+		weapons.push(fireWand);
+		// weapons.push(fireBallShotWeapon);
+		// // SHELL FLAK
+		// var shellbulletType = new Shell();
+		// var flakWeaponPattern = new Flak(x, y);
+		// var shellFlakWeapon = new Weapon(flakWeaponPattern, shellbulletType);
+		var shotgun = new Shotgun();
+		weapons.push(shotgun);
+		// weapons.push(shellFlakWeapon);
+		// // TOXICCIRCLE AURA
+		// var toxicCircleBulletType = new ToxicCircle();
+		// var auraWeaponPattern = new Aura(x, y, this);
+		// var toxicCircleAuraWeapon = new Weapon(auraWeaponPattern, toxicCircleBulletType);
+
+		var kineticAura = new KineticAura();
+		weapons.push(kineticAura);
+		// weapons.push(toxicCircleAuraWeapon);
+		// // LIGHTNING STRIKE
+		// var lightningStrikeBulletType = new LightningStrike();
+		// var beamWeaponPattern = new Beam(x, y);
+		// var lightningStrikeBeamWeapon = new Weapon(beamWeaponPattern, lightningStrikeBulletType);
+		// weapons.push(lightningStrikeBeamWeapon);
 	}
 
 	function updateMovement(elapsed:Float)

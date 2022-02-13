@@ -2,7 +2,7 @@ package bullettypes;
 
 import AnimationMap;
 
-class ToxicCircle extends BulletType
+class EnergyCircle extends BulletType
 {
 	public function new()
 	{

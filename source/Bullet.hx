@@ -16,17 +16,8 @@ class Bullet extends FlxSprite
 	{
 		this.weaponType = weaponType;
 		this.bulletType = bulletType;
-		this.target = weaponType.params.target;
-		this.lifeSpan = bulletType.params.lifeSpan;
-		this.bulletType = bulletType;
 		super(weaponType.params.startX, weaponType.params.startY);
 		loadGraphic(bulletType.params.graphic, true, bulletType.params.width, bulletType.params.height);
-		if (target == null)
-		{
-			velocity.set(bulletType.params.moveSpeed);
-			velocity.rotate(FlxPoint.weak(0, 0), weaponType.params.fireAngle);
-			angle = weaponType.params.fireAngle + 90;
-		}
 
 		for (i in 0...bulletType.params.animations.length)
 		{
@@ -39,11 +30,11 @@ class Bullet extends FlxSprite
 
 	public override function update(elapsed:Float)
 	{
-		if (target != null)
-		{
-			x = target.x;
-			y = target.y;
-		}
+		// if (target != null)
+		// {
+		// 	x = target.x;
+		// 	y = target.y;
+		// }
 		if (lifeSpan >= 0)
 		{
 			lifeSpan -= elapsed;

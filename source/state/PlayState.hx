@@ -205,8 +205,6 @@ class PlayState extends FlxState
 	{
 		for (weapon in player.weapons)
 		{
-			// weapon.updateAura(player);
-
 			if (weapon.bulletType.params.timer <= 0)
 			{
 				fireAngle = FlxAngle.angleBetweenMouse(player, true);
@@ -214,11 +212,25 @@ class PlayState extends FlxState
 				weapon.weaponType.params.startX = player.x;
 				weapon.weaponType.params.startY = player.y;
 				weapon.weaponType.params.fireAngle = fireAngle;
+				if (weapon.weaponType.params.magazine > 0 && weapon.weaponType.params.targets.length > 0)
+				{
+					weapon.weaponType.params.targets.pop
+				}
 				weapon.fireWeapon();
 				weapon.bulletType.params.timer = weapon.bulletType.params.cooldown;
 				add(weapon.bullets);
 			}
 			weapon.bulletType.params.timer -= 1;
+		}
+	}
+
+	function getEnemyArrayByDistanceFromPoint()
+	{
+		var enemyDistanceDictionary = new Array<Map<Dynamic, Dynamic>>();
+		for (enemy in enemies)
+		{
+			var enemyPoint:FlxPoint = enemy.getScreenPosition;
+			enemyDistanceDictionary.push({enemy:})
 		}
 	}
 

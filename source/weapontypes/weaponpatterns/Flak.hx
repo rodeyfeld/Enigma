@@ -1,5 +1,7 @@
 package weapontypes.weaponpatterns;
 
+import flixel.math.FlxRandom;
+
 class Flak extends Projectile
 {
 	public function new(startX, startY)

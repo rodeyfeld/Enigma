@@ -8,9 +8,4 @@ class WeaponType
 	{
 		this.params = params;
 	}
-
-	public function checkType()
-	{
-		trace("CALLED IN WEAPONTYPE");
-	}
 }

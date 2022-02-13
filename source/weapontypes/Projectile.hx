@@ -8,8 +8,5 @@ class Projectile extends WeaponType
 		super(params);
 	}
 
-	override public function checkType()
-	{
-		trace("CALLED IN PROJECTILE");
-	}
+	// override public function createBullet() {}
 }

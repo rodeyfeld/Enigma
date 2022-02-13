@@ -12,9 +12,4 @@ class Beam extends Projectile
 			'magazine': 3,
 		});
 	}
-
-	override public function checkType()
-	{
-		trace("CALLED IN BEAM");
-	}
 }
