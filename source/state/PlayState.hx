@@ -213,21 +213,19 @@ class PlayState extends FlxState
 		{
 			if (weapon.bulletType.params.timer <= 0)
 			{
-				weapon.weaponType.params.destX = player.x;
-				weapon.weaponType.params.destY = player.y;
+				fireAngle = FlxAngle.angleBetweenMouse(player, true) % 360;
 				for (i in 0...weapon.weaponType.params.magazine)
 				{
-					fireAngle = FlxAngle.angleBetweenMouse(player, true) % 360;
-					var targetEnemy:FlxObject = enemies.getRandom();
+					var currentEnemy:FlxSprite = enemies.getRandom();
+					var nextEnemy:FlxSprite = enemies.getRandom();
 					var updatedWeaponParams:Map<String, Float> = [
 						'startX' => weapon.weaponType.params.destX,
 						'startY' => weapon.weaponType.params.destY,
-						'destX' => targetEnemy.x,
-						'destY' => targetEnemy.y,
 						'fireAngle' => fireAngle
 					];
 					weapon.updateWeaponParams(updatedWeaponParams);
 					weapon.fireWeapon();
+					fireAngle = FlxAngle.angleBetween(currentEnemy, nextEnemy) % 360;
 				}
 				weapon.bulletType.params.timer = weapon.bulletType.params.cooldown;
 				add(weapon.bullets);
