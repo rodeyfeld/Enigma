@@ -4,8 +4,9 @@ import flixel.FlxObject;
 
 typedef WeaponTypeDefinition =
 {
-	public var ?weaponPattern:WeaponPatterns;
 	public var ?weaponType:WeaponTypes;
+	public var ?weaponPattern:WeaponPatterns;
+	public var ?weaponBehavior:WeaponBehaviors;
 	public var ?startX:Float;
 	public var ?startY:Float;
 	public var ?destX:Float;

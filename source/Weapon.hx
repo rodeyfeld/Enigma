@@ -3,8 +3,6 @@ package;
 import Bullet;
 import BulletType;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxRandom;
-import weapontypes.weaponpatterns.WeaponPatterns;
 
 class Weapon
 {

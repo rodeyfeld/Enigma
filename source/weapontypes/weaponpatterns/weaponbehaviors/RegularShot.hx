@@ -1,16 +1,15 @@
 package weapontypes.weaponpatterns.weaponbehaviors;
 
-class ChainShot extends Shot
+class RegularShot extends Shot
 {
 	public function new(startX, startY)
 	{
 		super({
-			'weaponBehavior': WeaponBehaviors.CHAINSHOT,
+			'weaponBehavior': WeaponBehaviors.REGULARSHOT,
 			'startX': startX,
 			'startY': startY,
 			'fireAngle': 0,
-			'magazine': 5,
-			'fireAngleVariance': 25
+			'magazine': 1,
 		});
 	}
 }

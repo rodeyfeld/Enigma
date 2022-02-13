@@ -4,8 +4,7 @@ class Shot extends Projectile
 {
 	public function new(params)
 	{
-		params.weaponType = WeaponPatterns.SHOT;
+		params.weaponPattern = WeaponPatterns.SHOT;
 		super(params);
 	}
-	// override public function createBullet() {}
 }

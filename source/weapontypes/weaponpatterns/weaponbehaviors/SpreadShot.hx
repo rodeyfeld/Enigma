@@ -5,10 +5,12 @@ class SpreadShot extends Shot
 	public function new(startX, startY)
 	{
 		super({
-			'weaponPattern': WeaponPatterns.SHOT,
+			'weaponBehavior': WeaponBehaviors.SPREADSHOT,
 			'startX': startX,
 			'startY': startY,
 			'fireAngle': 0,
+			'magazine': 5,
+			'fireAngleVariance': 25
 		});
 	}
 }
