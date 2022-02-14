@@ -32,10 +32,10 @@ class Player extends FlxSprite
 		// Weapons
 		// FIREBALL SHOT
 
-		var fireWand = new FireWand();
+		// var fireWand = new FireWand();
 		// weapons.push(fireWand);
 
-		var shotgun = new Shotgun();
+		// var shotgun = new Shotgun();
 		// weapons.push(shotgun);
 
 		// var kineticAura = new KineticAura();
@@ -46,8 +46,10 @@ class Player extends FlxSprite
 		// var beamWeaponPattern = new Beam(x, y);
 		// var lightningStrikeBeamWeapon = new Weapon(beamWeaponPattern, lightningStrikeBulletType);
 		// weapons.push(lightningStrikeBeamWeapon);
-		var chainLightningWand = new ChainLightningWand();
-		weapons.push(chainLightningWand);
+		// var chainLightningWand = new ChainLightningWand();
+		// weapons.push(chainLightningWand);
+		var iceNovaBall = new IceNovaBall();
+		weapons.push(iceNovaBall);
 	}
 
 	function updateMovement(elapsed:Float)

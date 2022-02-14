@@ -78,6 +78,7 @@ class PlayState extends FlxState
 		player = new Player();
 		add(player);
 		add(hud);
+		playerBullets = new FlxTypedGroup<Bullet>();
 
 		// add cam anchor (or follow point or whatever) and make the camera follow it
 		camAnchor = new FlxObject();
@@ -121,8 +122,8 @@ class PlayState extends FlxState
 		if (bullet.alive && bullet.exists && enemy.alive && enemy.exists)
 		{
 			enemy.health -= bullet.bulletType.params.damage;
-
-			//Check if bullet should remain after colliding
+			trace("HIT");
+			// Check if bullet should remain after colliding
 			if (!bullet.bulletType.params.persist)
 			{
 				bullet.kill();
@@ -196,10 +197,12 @@ class PlayState extends FlxState
 
 		// Bullet logic
 		checkWeaponLogic(player);
+		checkBulletLogic();
 	}
 
 	function checkWeaponLogic(player:Player)
 	{
+		// trace(player.weapons);
 		for (weapon in player.weapons)
 		{
 			if (weapon.bulletType.params.timer <= 0)
@@ -207,37 +210,49 @@ class PlayState extends FlxState
 				fireAngle = FlxAngle.angleBetweenMouse(player, true) % 360;
 				var currentEnemy:FlxSprite = player;
 				var nextEnemy:FlxSprite = enemies.getRandom();
+				var updatedWeaponParams:Map<String, Float>;
+				// trace(weapon);
 				for (i in 0...weapon.weaponType.params.magazine)
 				{
-					var updatedWeaponParams:Map<String, Float> = [
-						'startX' => currentEnemy.x,
-						'startY' => currentEnemy.y,
-						'fireAngle' => fireAngle
-					];
+					if (weapon.weaponType.params.weaponBehavior == WeaponBehaviors.CHAINSHOT)
+					{
+						updatedWeaponParams = ['startX' => currentEnemy.x, 'startY' => currentEnemy.y, 'fireAngle' => fireAngle];
+					}
+					else
+					{
+						updatedWeaponParams = ['startX' => player.x, 'startY' => player.y, 'fireAngle' => fireAngle];
+					}
 					weapon.updateWeaponParams(updatedWeaponParams);
-					weapon.fireWeapon();
+					var bullet:Bullet = weapon.fireWeapon();
+					if (bullet.bulletType.params.aliveEmmiter != null)
+					{
+						// bullet.bulletType.params.aliveEmmiter.focusOn(bullet);
+						bullet.bulletType.params.aliveEmmiter.start(false, .2, 0);
+						add(bullet.bulletType.params.aliveEmmiter);
+					}
+					playerBullets.add(bullet);
+
 					currentEnemy = nextEnemy;
 					nextEnemy = enemies.getRandom();
 					fireAngle = FlxAngle.angleBetween(currentEnemy, nextEnemy, true) % 360;
+					add(playerBullets);
 
-
+					trace("HMM1");
 				}
 				weapon.bulletType.params.timer = weapon.bulletType.params.cooldown;
-				add(weapon.bullets);
 			}
 			weapon.bulletType.params.timer -= 1;
 		}
 	}
 
-	function checkBulletLogic(weapon:Weapon)
+	function checkBulletLogic()
 	{
-		for (bullet in weapon.bullets)
+		for (bullet in playerBullets)
 		{
-			FlxG.overlap(bullet, enemies, bulletTouchEnemy);
+			var result:Bool = FlxG.overlap(bullet, enemies, bulletTouchEnemy);
+			trace(result);
 		}
 	}
-
-
 
 	function checkEnemyVision(enemy:Enemy)
 	{

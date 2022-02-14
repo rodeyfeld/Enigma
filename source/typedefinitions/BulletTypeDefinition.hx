@@ -1,5 +1,7 @@
 package typedefinitions;
 
+import flixel.effects.particles.FlxEmitter;
+
 typedef BulletTypeDefinition =
 {
 	public var ?graphic:String;
@@ -12,4 +14,7 @@ typedef BulletTypeDefinition =
 	public var ?damage:Float;
 	public var ?lifeSpan:Float;
 	public var ?persist:Bool;
+	public var ?aliveEmmiter:FlxEmitter;
+	public var ?startEmmiter:FlxEmitter;
+	public var ?endEmmiter:FlxEmitter;
 }
